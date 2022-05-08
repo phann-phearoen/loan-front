@@ -5,7 +5,7 @@ import mutations from './mutations'
 export const state = () => ({
   status: '',
   token: '',
-  writer: null,
+  user: null,
   ip_addr: '',
 })
 

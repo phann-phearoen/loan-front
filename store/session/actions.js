@@ -96,11 +96,11 @@ export default {
         })
         .then((resp) => {
           const token = resp.data.access_token
-          const writer = resp.data.writer
-          if (!writer) {
+          const user = resp.data.user
+          if (!user) {
             reject(new Error('API return value is wrong'))
           }
-          commit('SET_WRITER', writer)
+          commit('SET_USER', user)
           axios.defaults.headers.common.Authorization = token
           commit('auth_success', token)
           resolve(resp)

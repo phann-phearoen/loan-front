@@ -1,7 +1,7 @@
 const initialState = () => ({
   status: '',
   token: '',
-  writer: null,
+  user: null,
   ip_addr: '',
 })
 
@@ -13,8 +13,8 @@ export default {
     })
   },
 
-  SET_WRITER(state, writer) {
-    state.writer = writer
+  SET_USER(state, user) {
+    state.user = user
   },
   auth_request(state) {
     state.status = 'loading'
