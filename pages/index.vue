@@ -1,6 +1,7 @@
 <template>
   <div v-if="isLoggedIn">
     Hello Kampong Samki
+    <div>{{ getUser }}</div>
   </div>
 </template>
 
