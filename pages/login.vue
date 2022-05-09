@@ -30,16 +30,15 @@
           :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
           :type="show ? 'text' : 'password'"
           outlined
-          counter="6"
           :rules="passwordRule"
           @click:append="show = !show"
           :loading="sending"
         ></v-text-field>
         <div class="text-center">
           <v-btn
-           color="primary"
-           min-width="200"
-           type="submit"
+            color="primary"
+            min-width="200"
+            type="submit"
           >សាញអ៊ីន</v-btn>
         </div>
       </v-form>
@@ -71,8 +70,8 @@ export default {
     submit() {
       const email = this.email
       const password = this.password
-      this.$refs.form.validate()
-      if(this.formValid) {
+      const formValid = this.$refs.form.validate()
+      if(formValid) {
         this.sending = true
         this.$store
           .dispatch('session/apiLogin', { email, password })
@@ -85,8 +84,8 @@ export default {
           .catch((err) => {
             if(err) {
               this.sending = false
-              const msg = 'メールとパスワードを確認してください。'
-              this.$nuxt.$emit('setSnackbar', { msg: msg, color: 'red' })
+              const msg = 'សូមបញ្ជាក់លេខកូដសម្ងាត់ និង អ៊ីម៉ែលឡើងវិញ។'
+              this.$nuxt.$emit('setSnackbar', { text: msg, color: 'red' })
               this.auth_error = true
             }
           })
