@@ -33,6 +33,13 @@
           :rules="passwordRule"
           @click:append="show = !show"
         ></v-text-field>
+        <div class="text-center">
+          <v-btn
+           color="primary"
+           min-width="200"
+           type="submit"
+          >សាញអ៊ីន</v-btn>
+        </div>
       </v-form>
     </v-card-text>
   </v-card>
@@ -55,6 +62,11 @@ export default {
         v => v.length > 0 || 'លេខកូតសម្ដាត់មានយ៉ាងតិច៦ខ្ទង់។',
       ],
       show: false,
+    }
+  },
+  methods: {
+    submit() {
+      //
     }
   }
 }
