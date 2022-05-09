@@ -22,6 +22,7 @@
           label="អ៊ីម៉ែល"
           outlined
           :rules="emailRule"
+          :loading="sending"
         ></v-text-field>
         <v-text-field
           v-model="password"
@@ -32,6 +33,7 @@
           counter="6"
           :rules="passwordRule"
           @click:append="show = !show"
+          :loading="sending"
         ></v-text-field>
         <div class="text-center">
           <v-btn
@@ -62,11 +64,36 @@ export default {
         v => v.length > 0 || 'លេខកូតសម្ដាត់មានយ៉ាងតិច៦ខ្ទង់។',
       ],
       show: false,
+      sending: false,
     }
   },
   methods: {
     submit() {
-      //
+      const email = this.email
+      const password = this.password
+      this.$refs.form.validate()
+      if(this.formValid) {
+        this.sending = true
+        this.$store
+          .dispatch('session/apiLogin', { email, password })
+          .then((resp) => {
+            const user = resp.data.user
+            if (user) {
+              this.$router.replace('/')
+            }
+          })
+          .catch((err) => {
+            if(err) {
+              this.sending = false
+              const msg = 'メールとパスワードを確認してください。'
+              this.$nuxt.$emit('setSnackbar', { msg: msg, color: 'red' })
+              this.auth_error = true
+            }
+          })
+          .finally(() => {
+            this.sending = false
+          })
+      }
     }
   }
 }
