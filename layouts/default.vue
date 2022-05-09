@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app :dark="setTheme">
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -17,7 +17,7 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title v-text="item.title" style="min-height: 30px" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -53,21 +53,35 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+          icon: 'mdi-home',
+          title: 'ទំព័រដើម',
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
+          icon: 'mdi-cash-fast',
+          title: 'ដាក់ប្រាក់សន្សំ',
+          to: '/deposit'
+        },
+        {
+          icon: 'mdi-account-group',
+          title: 'គ្រប់គ្រងសមាជិក',
+          to: '/users'
+        },
+        {
+          icon: 'mdi-account-arrow-right',
+          title: 'គ្រប់គ្រងអតិថិជន',
+          to: '/clients'
+        },
       ],
-      miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+      rightDrawer: true,
+      title: 'ក្រុមសន្សំកំពង់សាមគ្គី'
     }
+  },
+  computed: {
+    setTheme () {
+      this.$vuetify.theme.dark = false
+    },
   }
 }
 </script>
