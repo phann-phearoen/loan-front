@@ -77,6 +77,7 @@
       <v-btn
         x-large
         color="primary"
+        @click="toDeposit"
       >
         ដាក់ប្រាក់សន្សំ
       </v-btn>
@@ -122,11 +123,14 @@ export default {
   computed: {
     ...mapGetters('session', ['getUser', 'isLoggedIn'])
   },
+  methods: {
+    toDeposit() { this.$router.push('/deposit') },
+  },
   mounted() {
     if(!this.isLoggedIn) {
       this.$router.replace('/login')
     }
-  }
+  },
 }
 </script>
 
