@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'DefaultLayout',
   data () {
@@ -82,6 +83,12 @@ export default {
     setTheme () {
       this.$vuetify.theme.dark = false
     },
+    ...mapGetters('session', ['isLoggedIn']),
+  },
+  mounted() {
+    if(!this.isLoggedIn) {
+      this.$router.replace('/login')
+    }
   }
 }
 </script>
