@@ -16,23 +16,28 @@
     <v-window v-model="step">
       <v-window-item :value="1">
         <v-card-text>
-          <v-chip-group>
+          <v-chip-group v-model="selectedAccount">
             <v-chip
               label
               active
               filter
-              v-model="my_account"
+            
             >
               គណនីផ្ទាល់ខ្លួន
             </v-chip>
             <v-chip
               label
               filter
-              v-model="others_account"
+            
             >
               គណនីសមាជិកផ្សេង
             </v-chip>
           </v-chip-group>
+          <div v-if="selectedAccount === 0">
+            <v-chip color="primary">
+              {{ me.name }}
+            </v-chip>
+          </div>
         </v-card-text>
       </v-window-item>
 
@@ -96,8 +101,7 @@ import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     step: 1,
-    my_account: null,
-    others_account: null,
+    selectedAccount: [],
   }),
   computed: {
     currentTitle () {
@@ -107,7 +111,11 @@ export default {
         default: return 'Account created'
       }
     },
-    ...mapGetters('session', { me: 'getUser' })
+    ...mapGetters('session', { me: 'getUser' }),
   },
+  methods: {
+  
+  },
+  mounted() { console.log(this.me)}
 }
 </script>
