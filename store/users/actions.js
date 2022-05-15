@@ -46,15 +46,19 @@ import axios from 'axios'
   })
   
 export default {
-  async getMe({ state, dispatch, commit }) {
+  async getAllUsers({ state, dispatch, commit }) {
     return await new Promise((resolve, reject) => {
-      dispatch('apiUserShowMe')
+      securedInst
+        .delete(`${process.env.NUXT_ENV_API_URL}/api/v1/users`)
         .then((resp) => {
-          dispatch('getMeAvatar')
-          resolve(resp)
+            const obj = resp.data
+            if (!obj) {
+                reject(new Error('API return value is wrong'))
+            }
+            resolve(resp)
         })
         .catch((err) => {
-          reject(err)
+            dispatch('handle_error', { reject, err })
         })
     })
   },
