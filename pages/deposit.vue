@@ -16,7 +16,10 @@
     <v-window v-model="step">
       <v-window-item :value="1">
         <v-card-text>
-          <v-chip-group v-model="selectedAccount">
+          <v-chip-group
+            v-model="selectedAccount"
+            @change="accountTodeposit = me"
+          >
             <v-chip
               label
               active
@@ -45,6 +48,7 @@
             label="ជ្រើសរើសគណនី"
             item-text="name"
             item-value="id"
+            @change="selectToDeposit"
           ></v-select>
         </v-card-text>
       </v-window-item>
@@ -93,7 +97,7 @@
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="step === 3"
+        :disabled="step === 3 || accountTodeposit === null"
         color="primary"
         depressed
         @click="step++"
@@ -111,6 +115,7 @@ export default {
     step: 1,
     selectedAccount: [],
     selectAccount: { name: "", id: null },
+    accountTodeposit: null,
   }),
   computed: {
     currentTitle () {
@@ -124,17 +129,20 @@ export default {
     ...mapGetters('members', ['getAllMembers']),
   },
   methods: {
-    async fetchAllUsers() {
+    async fetchAllMembers() {
       await this.$store
         .dispatch('members/getAllMembers')
         .then(res => {})
         .catch()
         .finally()
+    },
+    selectToDeposit() {
+      this.accountTodeposit = this.getAllMembers.find(e => e.id === this.selectAccount)
+      console.log(this.accountTodeposit)
     }
   },
-  mounted() { 
-    console.log(this.getAllMembers)
-    this.fetchAllUsers()
+  mounted() {
+    this.fetchAllMembers()
   }
 }
 </script>
