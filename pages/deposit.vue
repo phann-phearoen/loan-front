@@ -72,24 +72,31 @@
               v-model="amount"
               type="number"
               :rules="amountRule"
+              suffix="៛"
             ></v-text-field>
           </v-form>
         </v-card-text>
       </v-window-item>
 
       <v-window-item :value="3">
-        <div class="pa-4 text-center">
-          <v-img
-            class="mb-4"
-            contain
-            height="128"
-            src="https://cdn.vuetifyjs.com/images/logos/v.svg"
-          ></v-img>
-          <h3 class="text-h6 font-weight-light mb-2">
-            Welcome to Vuetify
-          </h3>
-          <span class="text-caption grey--text">Thanks for signing up!</span>
-        </div>
+        <v-card-text>
+          <div class="grey--text">បញ្ជាក់ព័ត៌មាន</div>
+          <v-text-field
+            v-if="accountTodeposit"
+            label="ឈ្មោះគណនី"
+            readonly
+            v-model="accountTodeposit.name"
+            outlined
+          ></v-text-field>
+          <v-text-field
+            v-if="accountTodeposit"
+            label="ចំនួនទឹកប្រាក់"
+            readonly
+            v-model="amount"
+            outlined
+            suffix="៛"
+          ></v-text-field>
+        </v-card-text>
       </v-window-item>
     </v-window>
 
