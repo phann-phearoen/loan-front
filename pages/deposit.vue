@@ -39,12 +39,12 @@
             </v-chip>
           </div>
           <v-select
-            v-else
+            v-if="selectedAccount === 1 && getAllUsers.length > 0"
             v-model="selectAccount"
             :items="getAllUsers"
             label="ជ្រើសរើសគណនី"
-            :item-text="selectAccount.name"
-            :item-value="selectAccount.id"
+            item-text="name"
+            item-value="id"
           ></v-select>
         </v-card-text>
       </v-window-item>
@@ -110,7 +110,7 @@ export default {
   data: () => ({
     step: 1,
     selectedAccount: [],
-    selectAccount: {},
+    selectAccount: { name: "", id: null },
   }),
   computed: {
     currentTitle () {
