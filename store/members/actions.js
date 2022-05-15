@@ -27,7 +27,7 @@ export default {
   async getAllMembers({ state, dispatch, commit }) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .get(`${process.env.NUXT_ENV_API_URL}/api/v1/users/get_all_members`)
+        .get(`${process.env.NUXT_ENV_API_URL}/api/v1/members`)
         .then((resp) => {
             const obj = resp.data
             if (!obj) {

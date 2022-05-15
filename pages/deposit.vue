@@ -39,9 +39,9 @@
             </v-chip>
           </div>
           <v-select
-            v-if="selectedAccount === 1 && getAllUsers.length > 0"
+            v-if="selectedAccount === 1 && getAllMembers.length > 0"
             v-model="selectAccount"
-            :items="getAllUsers"
+            :items="getAllMembers"
             label="ជ្រើសរើសគណនី"
             item-text="name"
             item-value="id"
@@ -121,19 +121,19 @@ export default {
       }
     },
     ...mapGetters('session', { me: 'getUser' }),
-    ...mapGetters('users', ['getAllUsers']),
+    ...mapGetters('members', ['getAllMembers']),
   },
   methods: {
     async fetchAllUsers() {
       await this.$store
-        .dispatch('users/getAllUsers')
+        .dispatch('members/getAllMembers')
         .then(res => {})
         .catch()
         .finally()
     }
   },
   mounted() { 
-    console.log(this.getAllUsers)
+    console.log(this.getAllMembers)
     this.fetchAllUsers()
   }
 }

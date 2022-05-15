@@ -1,5 +1,5 @@
 export default {
-  set_all_users(state, payload) {
+  set_all_members(state, payload) {
     state.allMembers = payload
   }
 }
