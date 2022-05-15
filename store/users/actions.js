@@ -1,29 +1,7 @@
 import axios from 'axios'
 
-  const signinAxiosInstance = axios.create({
-    baseURL: process.env.NUXT_ENV_API_URL,
-    withCredentials: false,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    proxyHeaders: false,
-    credentials: false,
-  })
-  signinAxiosInstance.interceptors.request.use((config) => {
-    const method = config.method.toUpperCase()
-    if (method !== 'OPTIONS' && method !== 'GET') {
-      config.params = {
-        ...config.params,
-        client_id: process.env.NUXT_ENV_CLIENT_ID || 'no-client-id',
-        client_secret: process.env.NUXT_ENV_CLIENT_SECRET || 'no-secret',
-        grant_type: 'password',
-      }
-    }
-    return config
-  })
-
   const inBrowser = typeof window !== 'undefined'
-  const securedAxiosInstance = axios.create({
+  const securedInst = axios.create({
     baseURL: process.env.NUXT_ENV_API_URL,
     withCredentials: false,
     headers: {
@@ -32,7 +10,7 @@ import axios from 'axios'
       Authorization: `Bearer ${inBrowser ? localStorage.getItem('token') : ''}`,
     },
   })
-  securedAxiosInstance.interceptors.request.use((config) => {
+  securedInst.interceptors.request.use((config) => {
     const method = config.method.toUpperCase()
     if (method !== 'OPTIONS') {
       const token = `${inBrowser ? localStorage.getItem('token') : ''}`
@@ -49,13 +27,14 @@ export default {
   async getAllUsers({ state, dispatch, commit }) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .delete(`${process.env.NUXT_ENV_API_URL}/api/v1/users`)
+        .get(`${process.env.NUXT_ENV_API_URL}/api/v1/users/get_all_users`)
         .then((resp) => {
             const obj = resp.data
             if (!obj) {
                 reject(new Error('API return value is wrong'))
             }
             resolve(resp)
+            commit('set_all_users', obj)
         })
         .catch((err) => {
             dispatch('handle_error', { reject, err })

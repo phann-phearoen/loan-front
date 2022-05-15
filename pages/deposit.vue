@@ -38,6 +38,14 @@
               {{ me.name }}
             </v-chip>
           </div>
+          <v-select
+            v-else
+            v-model="selectAccount"
+            :items="getAllUsers"
+            label="ជ្រើសរើសគណនី"
+            :item-text="selectAccount.name"
+            :item-value="selectAccount.id"
+          ></v-select>
         </v-card-text>
       </v-window-item>
 
@@ -102,6 +110,7 @@ export default {
   data: () => ({
     step: 1,
     selectedAccount: [],
+    selectAccount: {},
   }),
   computed: {
     currentTitle () {
@@ -112,10 +121,20 @@ export default {
       }
     },
     ...mapGetters('session', { me: 'getUser' }),
+    ...mapGetters('users', ['getAllUsers']),
   },
   methods: {
-  
+    async fetchAllUsers() {
+      await this.$store
+        .dispatch('users/getAllUsers')
+        .then(res => {})
+        .catch()
+        .finally()
+    }
   },
-  mounted() { console.log(this.me)}
+  mounted() { 
+    console.log(this.getAllUsers)
+    this.fetchAllUsers()
+  }
 }
 </script>
