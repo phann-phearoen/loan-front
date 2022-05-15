@@ -55,17 +55,25 @@
 
       <v-window-item :value="2">
         <v-card-text>
-          <v-text-field
-            label="Password"
-            type="password"
-          ></v-text-field>
-          <v-text-field
-            label="Confirm Password"
-            type="password"
-          ></v-text-field>
-          <span class="text-caption grey--text text--darken-1">
-            Please enter a password for your account
-          </span>
+          <v-form
+            ref="form"
+            lazy-validation
+          >
+            <v-text-field
+              v-if="accountTodeposit"
+              label="គណនីដែលបានជ្រើសរើស"
+              readonly
+              v-model="accountTodeposit.name"
+              outlined
+            ></v-text-field>
+            <v-text-field
+              label="ចំនួនទឹកប្រាក់ជារៀល"
+              outlined
+              v-model="amount"
+              type="number"
+              :rules="amountRule"
+            ></v-text-field>
+          </v-form>
         </v-card-text>
       </v-window-item>
 
@@ -116,6 +124,8 @@ export default {
     selectedAccount: [],
     selectAccount: { name: "", id: null },
     accountTodeposit: null,
+    amount: null,
+    amountRule: [ v => !!v || 'សូមបញ្ចូលចំនួនទឹកប្រាក់។' ]
   }),
   computed: {
     currentTitle () {
