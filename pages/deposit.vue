@@ -101,7 +101,7 @@
         text
         @click="step--"
       >
-        Back
+        ត្រឡប់
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
@@ -110,7 +110,7 @@
         depressed
         @click="step++"
       >
-        Next
+        បន្ត
       </v-btn>
     </v-card-actions>
   </v-card>
