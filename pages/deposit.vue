@@ -80,7 +80,6 @@
 
       <v-window-item :value="3">
         <v-card-text>
-          <div class="grey--text">បញ្ជាក់ព័ត៌មាន</div>
           <v-text-field
             v-if="accountTodeposit"
             label="ឈ្មោះគណនី"
@@ -148,8 +147,8 @@ export default {
     currentTitle () {
       switch (this.step) {
         case 1: return 'ជ្រើសរើសគណនីដែលត្រូវសន្សំ'
-        case 2: return 'Create a password'
-        default: return 'Account created'
+        case 2: return 'បញ្ចូលទឹកប្រាក់ដែលត្រូវសន្សំ'
+        default: return 'បញ្ជាក់ទិន្នន័យ'
       }
     },
     ...mapGetters('session', { me: 'getUser' }),
