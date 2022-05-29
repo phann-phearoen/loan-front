@@ -112,10 +112,20 @@
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="step === 3 || accountTodeposit === null"
+        v-if="step !== 3"
+        :disabled="accountTodeposit === null"
         color="primary"
         depressed
         @click="step++"
+      >
+        បន្ត
+      </v-btn>
+      <v-btn
+        v-if="step === 3"
+        :disabled="accountTodeposit === null"
+        color="primary"
+        depressed
+        @click="submit"
       >
         បន្ត
       </v-btn>
@@ -155,8 +165,10 @@ export default {
     },
     selectToDeposit() {
       this.accountTodeposit = this.getAllMembers.find(e => e.id === this.selectAccount)
-      console.log(this.accountTodeposit)
-    }
+    },
+    submit() {
+      //
+    },
   },
   mounted() {
     this.fetchAllMembers()
