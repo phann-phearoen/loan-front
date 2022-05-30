@@ -18,27 +18,25 @@
         <v-card-text>
           <v-chip-group
             v-model="selectedAccount"
-            @change="accountTodeposit = me"
+            @change="selectToDeposit"
           >
             <v-chip
               label
               active
               filter
-            
             >
               គណនីផ្ទាល់ខ្លួន
             </v-chip>
             <v-chip
               label
               filter
-            
             >
               គណនីសមាជិកផ្សេង
             </v-chip>
           </v-chip-group>
           <div v-if="selectedAccount === 0">
             <v-chip color="primary">
-              {{ me.name }}
+              {{ accountTodeposit.name }}
             </v-chip>
           </div>
           <v-select
@@ -152,17 +150,32 @@ export default {
       }
     },
     ...mapGetters('session', { me: 'getUser' }),
-    ...mapGetters('members', ['getAllMembers']),
+    ...mapGetters('members', ['getAllMembers', 'getThisMember']),
   },
   methods: {
-    async fetchAllMembers() {
+    async fetchThisMember() {
       await this.$store
-        .dispatch('members/getAllMembers')
+        .dispatch('members/getThisMember')
+        .then((res) => {
+          this.fetchAllMembers(this.getThisMember.id)
+        })
+        .catch()
+        .finally()
+    },
+    async fetchAllMembers(admin_id) {
+      await this.$store
+        .dispatch('members/getAllMembers', {
+          admin_id: admin_id
+        })
         .then(res => {})
         .catch()
         .finally()
     },
     selectToDeposit() {
+      if (this.selectedAccount === 0) {
+        this.accountTodeposit = this.getThisMember
+        return
+      }
       this.accountTodeposit = this.getAllMembers.find(e => e.id === this.selectAccount)
     },
     submit() {
@@ -170,7 +183,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchAllMembers()
+    this.fetchThisMember()
   }
 }
 </script>
