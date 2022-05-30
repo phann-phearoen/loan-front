@@ -5,6 +5,7 @@ import mutations from './mutations'
 export const state = () => ({
   allMembers: [],
   thisMember: null,
+  oneMember: null,
 })
 
 export default {

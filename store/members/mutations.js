@@ -5,4 +5,7 @@ export default {
   set_this_member(state, payload) {
     state.thisMember = payload
   },
+  set_one_member(state, payload) {
+    state.oneMember = payload
+  },
 }

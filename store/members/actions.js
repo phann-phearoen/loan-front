@@ -62,6 +62,23 @@ export default {
         .catch((err) => {})
     })
   },
+  async getOneMember({ state, dispatch, commit}, payload) {
+    return await new Promise((resolve, reject) => {
+      securedInst
+        .get(`/api/v1/members/get_one_member`, {
+          params: { id: payload },
+        })
+        .then((resp) => {
+          const obj = resp.data
+          if (!obj) {
+            reject(new Error('API return value is wrong'))
+          }
+          resolve(resp)
+          commit('set_one_member', obj)
+        })
+        .catch((err) => {})
+    })
+  },
   async apiNewDeposit({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
