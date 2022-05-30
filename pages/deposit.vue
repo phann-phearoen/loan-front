@@ -153,20 +153,9 @@ export default {
     ...mapGetters('members', ['getAllMembers', 'getThisMember']),
   },
   methods: {
-    async fetchThisMember() {
+    async fetchAllMembers() {
       await this.$store
-        .dispatch('members/getThisMember')
-        .then((res) => {
-          this.fetchAllMembers(this.getThisMember.id)
-        })
-        .catch()
-        .finally()
-    },
-    async fetchAllMembers(admin_id) {
-      await this.$store
-        .dispatch('members/getAllMembers', {
-          admin_id: admin_id
-        })
+        .dispatch('members/getAllMembers')
         .then(res => {})
         .catch()
         .finally()
@@ -193,7 +182,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchThisMember()
+    this.fetchAllMembers()
   }
 }
 </script>
