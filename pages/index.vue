@@ -49,7 +49,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ getUser.total_deposit }} ៛
+          {{ getThisMember.total_deposit }} ៛
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -121,10 +121,18 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'IndexPage',
   computed: {
-    ...mapGetters('session', ['getUser', 'isLoggedIn'])
+    ...mapGetters('session', ['getUser', 'isLoggedIn']),
+    ...mapGetters('members', ['getThisMember'])
   },
   methods: {
     toDeposit() { this.$router.push('/deposit') },
+    async fetchThisMember() {
+      await this.$store
+        .dispatch('members/getThisMember')
+        .then()
+        .catch()
+        .finally()
+    },
   },
   mounted() {
     if(!this.isLoggedIn) {

@@ -179,6 +179,7 @@ export default {
       this.accountTodeposit = this.getAllMembers.find(e => e.id === this.selectAccount)
     },
     async submit() {
+      console.log(this.accountTodeposit.id)
       await this.$store
         .dispatch('members/apiNewDeposit', {
           amount: this.amount,
