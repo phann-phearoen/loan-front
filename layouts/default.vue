@@ -84,7 +84,7 @@ export default {
         {
           icon: 'mdi-account-group',
           title: 'គ្រប់គ្រងសមាជិក',
-          to: '/users'
+          to: '/members'
         },
         {
           icon: 'mdi-account-arrow-right',
