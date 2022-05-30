@@ -126,11 +126,18 @@ export default {
   },
   methods: {
     toDeposit() { this.$router.push('/deposit') },
+    async fetchThisMember() {
+      await this.$store
+        .dispatch('members/getThisMember')
+        .then()
+        .finally()
+    },
   },
   mounted() {
     if(!this.isLoggedIn) {
       this.$router.replace('/login')
     }
+    this.fetchThisMember()
   },
 }
 </script>
