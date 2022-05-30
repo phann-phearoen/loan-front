@@ -24,19 +24,21 @@ import axios from 'axios'
   })
   
 export default {
-  async getAllMembers({ state, dispatch, commit }, payload) {
+  async getAllMembers({ state, dispatch, commit, getters, rootGetters }, payload) {
     return await new Promise((resolve, reject) => {
+      const thisUser = rootGetters['session/getUser']
       securedInst
-        .get(`/api/v1/members`, {
-          params: { admin_id: payload.admin_id }
-        })
+        .get(`/api/v1/members`)
         .then((resp) => {
           const obj = resp.data
           if (!obj) {
             reject(new Error('API return value is wrong'))
           }
           resolve(resp)
-          commit('set_all_members', obj)
+          const allMembers = obj.filter(e => e.name !== thisUser.name)
+          commit('set_all_members', allMembers)
+          const thisMember = obj.find(e => e.name === thisUser.name)
+          commit('set_this_member', thisMember)
         })
         .catch((err) => {})
     })
