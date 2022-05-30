@@ -79,6 +79,7 @@ export default {
             const user = resp.data.user
             if (user) {
               this.$router.replace('/')
+              this.fetchThisMember()
             }
           })
           .catch((err) => {
@@ -93,7 +94,14 @@ export default {
             this.sending = false
           })
       }
-    }
+    },
+    async fetchThisMember() {
+      await this.$store
+        .dispatch('members/getThisMember')
+        .then()
+        .catch()
+        .finally()
+    },
   }
 }
 </script>
