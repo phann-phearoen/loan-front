@@ -179,14 +179,14 @@ export default {
       this.accountTodeposit = this.getAllMembers.find(e => e.id === this.selectAccount)
     },
     async submit() {
-      console.log(this.accountTodeposit.id)
       await this.$store
         .dispatch('members/apiNewDeposit', {
           amount: this.amount,
           id: this.accountTodeposit.id,
         })
         .then((res) => {
-          console.log(res)
+          this.$nuxt.$emit('setSnackbar', res.data.message)
+          this.$router.push('/')
         })
         .catch()
         .finally()

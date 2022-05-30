@@ -40,6 +40,24 @@
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+    <v-snackbar
+      v-model="snackbar.model"
+      color="primary"
+      outlined
+      timeout="3000"
+    >
+      {{ snackbar.text }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          small
+          v-bind="attrs"
+          plain
+          @click="snackbar.model = false"
+        >
+          <v-icon color="red">mdi-close</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -76,7 +94,11 @@ export default {
       ],
       right: true,
       rightDrawer: true,
-      title: 'ក្រុមសន្សំកំពង់សាមគ្គី'
+      title: 'ក្រុមសន្សំកំពង់សាមគ្គី',
+      snackbar: {
+        model: false,
+        text: '',
+      },
     }
   },
   computed: {
@@ -85,10 +107,20 @@ export default {
     },
     ...mapGetters('session', ['isLoggedIn']),
   },
+  methods: {
+    setSnackbar(val) {
+      this.snackbar.model = true
+      this.snackbar.text = val
+    },
+  },
   mounted() {
     if(!this.isLoggedIn) {
       this.$router.replace('/login')
     }
-  }
+    this.$nuxt.$on('setSnackbar', (val) => this.setSnackbar(val))
+  },
+  beforeDestroy() {
+    this.$nuxt.$off('setSnackbar')
+  },
 }
 </script>
