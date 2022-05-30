@@ -178,8 +178,17 @@ export default {
       }
       this.accountTodeposit = this.getAllMembers.find(e => e.id === this.selectAccount)
     },
-    submit() {
-      //
+    async submit() {
+      await this.$store
+        .dispatch('members/apiNewDeposit', {
+          amount: this.amount,
+          id: this.accountTodeposit.id,
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch()
+        .finally()
     },
   },
   mounted() {

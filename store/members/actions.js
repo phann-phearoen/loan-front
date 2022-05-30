@@ -63,10 +63,8 @@ export default {
     return await new Promise((resolve, reject) => {
       securedInst
         .put(`/api/v1/members/deposit`, {
-          params: {
-            amount: payload.amount,
-            member_id: payload.memberId,
-          }
+          id: payload.id,
+          amount: payload.amount,
         })
         .then((resp) => {
           const obj = resp.data
