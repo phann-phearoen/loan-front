@@ -17,6 +17,27 @@
           :items-per-page="pagination.itemsPerPage"
         ></v-data-table>
       </v-card-text>
+      <v-card-actions class="justify-space-around">
+        <v-select
+          style="max-width: 150px"
+          :items="perPage"
+          v-model="pagination.itemsPerPage"
+          label="ក្នុងមួយទំព័រ"
+          @change="paginated"
+        ></v-select>
+        <v-pagination
+          v-model="pagination.page"
+          :length="pagination.totalPages"
+          :total-visible="8"
+          circle
+          @next="paginated"
+          @previous="paginated"
+          @input="paginated"
+        ></v-pagination>
+        <div
+          style="max-width: 150px"
+        >{{ '総数：' + pagination.totalCount }}</div>
+      </v-card-actions>
     </v-card>
   </v-container>
 </template>
@@ -46,6 +67,7 @@ export default {
         totalCount: null,
         totalPages: null,
       },
+      perPage: [5, 10, 15],
     }
   },
   computed: {
@@ -59,9 +81,15 @@ export default {
           page: this.pagination.page,
           per: this.pagination.itemsPerPage,
         })
-        .then()
+        .then((res) => {
+          this.pagination.totalCount = res.data.total_count
+          this.pagination.totalPages = res.data.total_pages
+        })
         .catch()
         .finally(() => this.isLoading = false)
+    },
+    paginated() {
+      this.fetchMembers()
     },
   },
   mounted() {
