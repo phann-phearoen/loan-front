@@ -24,21 +24,22 @@ import axios from 'axios'
   })
   
 export default {
-  async getAllMembers({ state, dispatch, commit, getters, rootGetters }, payload) {
+  async getAllMembers({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
-      const thisUser = rootGetters['session/getUser']
       securedInst
-        .get(`/api/v1/members`)
+        .get(`/api/v1/members`, {
+          params: {
+            page: payload.page,
+            per: payload.itemsPerPage,
+          }
+        })
         .then((resp) => {
           const obj = resp.data
           if (!obj) {
             reject(new Error('API return value is wrong'))
           }
           resolve(resp)
-          const allMembers = obj.filter(e => e.name !== thisUser.name)
-          commit('set_all_members', allMembers)
-          const thisMember = obj.find(e => e.name === thisUser.name)
-          commit('set_this_member', thisMember)
+          commit('set_all_members', obj.members)
         })
         .catch((err) => {})
     })

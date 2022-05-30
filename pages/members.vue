@@ -4,7 +4,18 @@
       <v-card-title class="justify-center">បញ្ជីសមាជិក</v-card-title>
       <v-divider></v-divider>
       <v-card-text>
-        <div v-for="member in members" :key="member.id">{{ member.name }}</div>
+        <v-data-table
+          :headers="headers"
+          :items="members"
+          class="elevation-1"
+          :loading="isLoading"
+          loading-text="ローディング..."
+          no-data-text="データがありません。"
+          no-results-text="一致する投稿がありません。"
+          show-select
+          hide-default-footer
+          :items-per-page="pagination.itemsPerPage"
+        ></v-data-table>
       </v-card-text>
     </v-card>
   </v-container>
@@ -15,7 +26,26 @@ import { mapGetters} from 'vuex'
 export default {
   data() {
     return {
-
+      headers: [
+        {
+          text: 'អត្តលេខ',
+          align: 'start',
+          sortable: false,
+          value: 'id',
+        },
+        { text: 'ឈ្មោះ', value: 'name' },
+        { text: 'ភេទ', value: 'gender' },
+        { text: 'លេខទូរស័ព្ទ', value: 'phone' },
+        { text: 'ប្រាក់សន្សំសរុប', value: 'total_deposit' },
+        { text: 'ប្រាក់កម្ចីសរុប', value: 'loan' },
+      ],
+      isLoading: false,
+      pagination: {
+        itemsPerPage: 10,
+        page: 1,
+        totalCount: null,
+        totalPages: null,
+      },
     }
   },
   computed: {
@@ -23,11 +53,15 @@ export default {
   },
   methods: {
     async fetchMembers() {
+      this.isLoading = true
       await this.$store
-        .dispatch('members/getAllMembers')
+        .dispatch('members/getAllMembers', {
+          page: this.pagination.page,
+          per: this.pagination.itemsPerPage,
+        })
         .then()
         .catch()
-        .finally()
+        .finally(() => this.isLoading = false)
     },
   },
   mounted() {

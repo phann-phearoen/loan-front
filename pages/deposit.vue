@@ -155,9 +155,18 @@ export default {
   methods: {
     async fetchAllMembers() {
       await this.$store
-        .dispatch('members/getAllMembers')
+        .dispatch('members/getAllMembers', {
+          page: 1,
+          per: 10,
+        })
         .then(res => {})
         .catch()
+        .finally()
+    },
+    async fetchThisMember() {
+      await this.$store
+        .dispatch('members/getThisMember')
+        .then()
         .finally()
     },
     selectToDeposit() {
@@ -183,6 +192,7 @@ export default {
   },
   mounted() {
     this.fetchAllMembers()
+    this.fetchThisMember()
   }
 }
 </script>
