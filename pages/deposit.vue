@@ -184,7 +184,11 @@ export default {
         })
         .then((res) => {
           this.$nuxt.$emit('setSnackbar', res.data.message)
-          this.$router.push('/')
+          if (this.getThisMember.id === this.accountTodeposit.id) {
+            this.$router.push('/')
+            return
+          }
+          this.$router.push('/members')
         })
         .catch()
         .finally()
