@@ -6,13 +6,23 @@
       <v-card-subtitle>ជ្រើសរើសគណនីដែលត្រូវសន្សំ</v-card-subtitle>
       <v-card-text>
         <v-form ref="form" lazy-validation>
-          <v-text-field
-            label="បញ្ចូលអត្តលេខសមាជិក"
-            hint="លេខរ៉ូម៉ាំង"
-            type="number"
-            v-model="memberId"
-            :rules="v => !!v || 'សូមបញ្ចូលអត្តលេខឲ្យបានត្រឹមត្រូវ។'"
-          ></v-text-field>
+          <v-row>
+            <v-col cols="8">
+              <v-text-field
+                label="បញ្ចូលអត្តលេខសមាជិក"
+                hint="លេខរ៉ូម៉ាំង"
+                type="number"
+                v-model="memberId"
+                :rules="v => !!v || 'សូមបញ្ចូលអត្តលេខឲ្យបានត្រឹមត្រូវ។'"
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-btn
+                color="primary"
+                @click="doFindMember"
+              >ស្វែងរកសមាជិក</v-btn>
+            </v-col>
+          </v-row>
         </v-form>
       </v-card-text>
     </v-card>
@@ -32,23 +42,14 @@ export default {
   },
   computed: {
     ...mapGetters('session', { me: 'getUser' }),
-    ...mapGetters('members', ['getAllMembers', 'getThisMember']),
+    ...mapGetters('members', ['getOneMember']),
   },
   methods: {
-    async fetchAllMembers() {
+    async doFindMember() {
       await this.$store
-        .dispatch('members/getAllMembers', {
-          page: 1,
-          per: 10,
-        })
-        .then(res => {})
-        .catch()
-        .finally()
-    },
-    async fetchThisMember() {
-      await this.$store
-        .dispatch('members/getThisMember')
+        .dispatch('members/getOneMember', this.memberId)
         .then()
+        .catch()
         .finally()
     },
     async submit() {
@@ -69,8 +70,6 @@ export default {
         .finally()
     },
     mounted() {
-      this.fetchAllMembers()
-      this.fetchThisMember()
     }
   },
 }
