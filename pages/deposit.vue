@@ -6,7 +6,7 @@
       <v-card-text>
         <v-card-subtitle>ជ្រើសរើសគណនីដែលត្រូវសន្សំ</v-card-subtitle>
         <v-row>
-          <v-col cols="8">
+          <v-col cols="7">
             <v-text-field
               ref="memberId"
               label="បញ្ចូលអត្តលេខសមាជិក"
@@ -19,13 +19,14 @@
           <v-col>
             <v-btn
               :disabled="!memberId"
+              min-width="150"
               color="primary"
               @click="doFindMember"
             >ស្វែងរកសមាជិក</v-btn>
           </v-col>
         </v-row>
         <v-row v-if="getOneMember">
-          <v-col cols="8">
+          <v-col cols="7">
             <div
               id="foundMember"
               :class="getOneMember === selectedMember ? 'is-selected' : ''"
@@ -46,6 +47,7 @@
           <v-col>
             <v-btn
               color="primary"
+              min-width="150"
               @click="doSelectMember"
             >
               យកគណនីនេះ
@@ -53,6 +55,7 @@
             <v-btn
               color="red"
               dark
+              min-width="150"
               @click="doFindOtherMember"
             >
               ស្វែងរកថ្មី
@@ -60,7 +63,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="8">
+          <v-col cols="7">
             <v-text-field
               ref="memberId"
               label="បញ្ចូលចំនួនទឹកប្រាក់"
@@ -70,6 +73,15 @@
               v-model="amount"
               :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
             ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-btn
+              color="primary"
+              min-width="150"
+              @click="confirmSubmit"
+            >
+              បញ្ចប់
+            </v-btn>
           </v-col>
         </v-row>
       </v-card-text>
