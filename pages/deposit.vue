@@ -188,7 +188,7 @@ export default {
             this.$router.push('/')
             return
           }
-          this.$router.push('/members')
+          this.$router.push(`/members/${this.accountTodeposit.id}`)
         })
         .catch()
         .finally()
