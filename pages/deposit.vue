@@ -3,18 +3,19 @@
     <v-card width="100%">
       <v-card-title>ដាក់ប្រាក់សន្សំ</v-card-title>
       <v-divider></v-divider>
+      <v-card-subtitle>ជ្រើសរើសគណនីដែលត្រូវសន្សំ</v-card-subtitle>
       <v-card-text>
-        <v-card-subtitle>ជ្រើសរើសគណនីដែលត្រូវសន្សំ</v-card-subtitle>
         <v-form ref="form" lazy-validation>
           <v-text-field
             label="បញ្ចូលអត្តលេខសមាជិក"
+            hint="លេខរ៉ូម៉ាំង"
             type="number"
-            v-model="selectedMember.id"
+            v-model="memberId"
+            :rules="v => !!v || 'សូមបញ្ចូលអត្តលេខឲ្យបានត្រឹមត្រូវ។'"
           ></v-text-field>
         </v-form>
       </v-card-text>
     </v-card>
-
   </v-container>
 </template>
 
@@ -23,6 +24,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      memberId: null,
       selectedMember: {
         id: null,
       },
