@@ -32,6 +32,21 @@
                 ភេទ៖ {{ getOneMember.gender }}
               </div>
             </v-col>
+            <v-col>
+              <v-btn
+                color="primary"
+                @click="doSelectMember"
+              >
+                យកគណនីនេះ
+              </v-btn>
+              <v-btn
+                color="red"
+                dark
+                @click="doFindOtherMember"
+              >
+                ស្វែងរកថ្មី
+              </v-btn>
+            </v-col>
           </v-row>
         </v-form>
       </v-card-text>
