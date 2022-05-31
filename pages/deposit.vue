@@ -13,14 +13,24 @@
                 hint="លេខរ៉ូម៉ាំង"
                 type="number"
                 v-model="memberId"
-                :rules="v => !!v || 'សូមបញ្ចូលអត្តលេខឲ្យបានត្រឹមត្រូវ។'"
+                :rules="[v => !!v || 'សូមបញ្ចូលអត្តលេខឲ្យបានត្រឹមត្រូវ។']"
               ></v-text-field>
             </v-col>
             <v-col>
               <v-btn
+                :disabled="!memberId"
                 color="primary"
                 @click="doFindMember"
               >ស្វែងរកសមាជិក</v-btn>
+            </v-col>
+          </v-row>
+          <v-row v-if="getOneMember">
+            <v-col cols="8">
+              <div id="foundMember">
+                អត្តលេខ៖​ {{ getOneMember.id }}, 
+                ឈ្មោះ៖ {{ getOneMember.name }}, 
+                ភេទ៖ {{ getOneMember.gender }}
+              </div>
             </v-col>
           </v-row>
         </v-form>
@@ -74,3 +84,13 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+#foundMember {
+  width: 100%;
+  border: 1px grey solid;
+  border-radius: 5px;
+  padding: .5em;
+  font-size: 1.2em;
+}
+</style>
