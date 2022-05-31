@@ -70,6 +70,21 @@
       </v-row>
       <v-divider></v-divider>
     </v-card-text>
+    <v-card-actions>
+      <v-btn
+        x-large
+        color="primary"
+        @click="toDeposit"
+      >
+        ដាក់ប្រាក់សន្សំ
+      </v-btn>
+      <v-btn
+        x-large
+        color="primary"
+      >
+        សងប្រាក់
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
