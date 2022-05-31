@@ -134,10 +134,11 @@ export default {
     },
   },
   mounted() {
-    if(!this.isLoggedIn) {
+    if (!this.isLoggedIn) {
       this.$router.replace('/login')
     }
-    this.fetchThisMember()
+    if (this.isLoggedIn)
+      this.fetchThisMember()
   },
 }
 </script>
