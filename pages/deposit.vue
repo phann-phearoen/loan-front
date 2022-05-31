@@ -3,8 +3,8 @@
     <v-card width="100%">
       <v-card-title>ដាក់ប្រាក់សន្សំ</v-card-title>
       <v-divider></v-divider>
-      <v-card-subtitle>ជ្រើសរើសគណនីដែលត្រូវសន្សំ</v-card-subtitle>
       <v-card-text>
+        <v-card-subtitle>ជ្រើសរើសគណនីដែលត្រូវសន្សំ</v-card-subtitle>
         <v-row>
           <v-col cols="8">
             <v-text-field
@@ -59,6 +59,19 @@
             </v-btn>
           </v-col>
         </v-row>
+        <v-row>
+          <v-col cols="8">
+            <v-text-field
+              ref="memberId"
+              label="បញ្ចូលចំនួនទឹកប្រាក់"
+              hint="លេខរ៉ូម៉ាំង"
+              type="number"
+              suffix="៛"
+              v-model="amount"
+              :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
+            ></v-text-field>
+          </v-col>
+        </v-row>
       </v-card-text>
     </v-card>
   </v-container>
@@ -71,6 +84,7 @@ export default {
     return {
       memberId: null,
       selectedMember: null,
+      amount: null,
     }
   },
   computed: {
