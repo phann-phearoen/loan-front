@@ -1,7 +1,7 @@
 <template>
   <v-card width="100%">
     <v-card-title class="justify-center text-h5">
-      គណណីរបាស់ {{ oneMember.name }}
+      គណណីរបស់ {{ oneMember.name }}
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text class="px-16">
@@ -65,7 +65,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ oneMember.total_deposit }} ៛
+          {{ oneMember.loan }} ៛
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -98,3 +98,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.detail-row {
+  min-height: 100px !important;
+}
+</style>
