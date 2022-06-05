@@ -29,7 +29,7 @@
           <v-col cols="7">
             <div
               id="foundMember"
-              :class="getOneMember === selectedMember ? 'is-selected' : ''"
+              :class="getOneMember === selectedMember ? 'is-selected primary--text' : ''"
             >
               <div class="d-inline mr-auto">
                 អត្តលេខ៖​ {{ getOneMember.id }}, 
@@ -62,10 +62,9 @@
             </v-btn>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row v-if="selectedMember">
           <v-col cols="7">
             <v-text-field
-              ref="memberId"
               label="បញ្ចូលចំនួនទឹកប្រាក់"
               hint="លេខរ៉ូម៉ាំង"
               type="number"
@@ -78,6 +77,7 @@
             <v-btn
               color="primary"
               min-width="150"
+              :disabled="!amount"
               @click="confirmSubmit"
             >
               បញ្ចប់
@@ -86,17 +86,36 @@
         </v-row>
       </v-card-text>
     </v-card>
+    <confirm-dialog :dialog="dialog">
+      <template v-if="selectedMember && amount">
+        <div>
+          <span>អត្តលេខ៖ </span><strong>{{ selectedMember.id }}</strong>
+        </div>
+        <div>
+          <span>ឈ្មោះ៖ </span><strong>{{ selectedMember.name }}</strong>
+        </div>
+        <div>
+          <span>ចំនួនទឹកប្រាក់៖ </span><strong>{{ amount }}៛</strong>
+        </div>
+      </template>
+    </confirm-dialog>
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import ConfirmDialog from '../components/ConfirmDialog.vue'
 export default {
+  components: { ConfirmDialog },
   data() {
     return {
       memberId: null,
       selectedMember: null,
       amount: null,
+      dialog: {
+        model: false,
+        title: '',
+      },
     }
   },
   computed: {
@@ -122,21 +141,35 @@ export default {
       await this.$store
         .dispatch('members/apiNewDeposit', {
           amount: this.amount,
-          id: this.accountTodeposit.id,
+          id: this.selectedMember.id,
         })
         .then((res) => {
           this.$nuxt.$emit('setSnackbar', res.data.message)
-          if (this.getThisMember.id === this.accountTodeposit.id) {
+          if (this.selectedMember.name === this.me.name) {
             this.$router.push('/')
             return
           }
-          this.$router.push(`/members/${this.accountTodeposit.id}`)
+          this.$router.push(`/members/${this.selectedMember.id}`)
         })
         .catch()
         .finally()
     },
-    mounted() {
-    }
+    confirmSubmit() {
+      this.dialog.title = 'សូមបញ្ជាក់ទិន្នន័យ!'
+      this.dialog.model = true
+    },
+  },
+  mounted() {
+    this.$nuxt.$on('confirmYes', () => {
+      this.submit()
+    })
+    this.$nuxt.$on('confirmNo', () => {
+      this.dialog.model = false
+    })
+  },
+  beforeDestroy() {
+    this.$nuxt.$off('confirmYes')
+    this.$nuxt.$off('confirmNo')
   },
 }
 </script>

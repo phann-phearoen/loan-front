@@ -16,6 +16,7 @@
         >
           ទេ
         </v-btn>
+        <v-spacer></v-spacer>
         <v-btn
           color="primary"
           min-width="100"

@@ -101,15 +101,18 @@ export default {
     ...mapGetters('members', { oneMember: 'getOneMember' }),
   },
   methods: {
-    async fetchOneMember() {
-      await this.$store
-        .dispatch('members/getOneMember', this.id)
-        .then()
-        .finally()
-    },
+    // async fetchOneMember() {
+    //   await this.$store
+    //     .dispatch('members/getOneMember', this.id)
+    //     .then()
+    //     .finally()
+    // },
   },
   mounted() {
-    this.fetchOneMember()
+    // this.fetchOneMember()
+  },
+  beforeDestroy() {
+    this.$store.commit('members/set_one_member', null)
   },
 }
 </script>
