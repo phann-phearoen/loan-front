@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-if="isLoggedIn"
+    v-if="isLoggedIn && getThisMember && getUser"
   >
     <v-card-title class="justify-center text-h5">គណនីរបស់ខ្ញុំ</v-card-title>
     <v-divider></v-divider>
