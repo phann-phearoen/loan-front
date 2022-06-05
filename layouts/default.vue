@@ -82,6 +82,11 @@ export default {
           to: '/deposit'
         },
         {
+          icon: 'mdi-currency-usd-off',
+          title: 'ផ្ដល់ប្រាក់កម្ចី',
+          to: '/loan'
+        },
+        {
           icon: 'mdi-account-group',
           title: 'គ្រប់គ្រងសមាជិក',
           to: '/members'
