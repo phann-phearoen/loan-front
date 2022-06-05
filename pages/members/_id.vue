@@ -81,6 +81,7 @@
       <v-btn
         x-large
         color="primary"
+        @click="toRepay"
       >
         សងប្រាក់
       </v-btn>
@@ -101,18 +102,22 @@ export default {
     ...mapGetters('members', { oneMember: 'getOneMember' }),
   },
   methods: {
-    // async fetchOneMember() {
-    //   await this.$store
-    //     .dispatch('members/getOneMember', this.id)
-    //     .then()
-    //     .finally()
-    // },
+    async fetchOneMember() {
+      await this.$store
+        .dispatch('members/getOneMember', this.id)
+        .then()
+        .finally()
+    },
+    toDeposit() {
+      this.$router.push('/deposit')
+    },
+    toRepay() {
+      
+    },
   },
   mounted() {
-    // this.fetchOneMember()
-  },
-  beforeDestroy() {
-    this.$store.commit('members/set_one_member', null)
+    if (!this.oneMember)
+      this.fetchOneMember()
   },
 }
 </script>

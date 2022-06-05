@@ -140,6 +140,9 @@ export default {
     if (this.isLoggedIn)
       this.fetchThisMember()
   },
+  beforeDestroy() {
+    this.$store.commit('members/set_one_member', null)
+  },
 }
 </script>
 
