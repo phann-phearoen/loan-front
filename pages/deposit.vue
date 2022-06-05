@@ -126,8 +126,13 @@ export default {
     async doFindMember() {
       await this.$store
         .dispatch('members/getOneMember', this.memberId)
-        .then()
-        .catch()
+        .then((res) => {})
+        .catch((err) => {
+          if (err) {
+            this.$nuxt.$emit('setSnackbar', 'មិនមានគណនីជាមួយអត្តលេខនេះទេ!')
+            this.$refs.memberId.$refs.input.focus()
+          }
+        })
         .finally()
     },
     doSelectMember () {

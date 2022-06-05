@@ -76,7 +76,9 @@ export default {
           resolve(resp)
           commit('set_one_member', obj)
         })
-        .catch((err) => {})
+        .catch((err) => {
+          reject(err)
+        })
     })
   },
   async apiNewDeposit({ state, dispatch, commit }, payload) {
