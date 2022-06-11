@@ -11,4 +11,7 @@ export default {
   set_member_to_deposit(state, payload) {
     state.memberToDeposit = payload
   },
+  set_member_to_loan(state, payload) {
+    state.memberToLoan = payload
+  },
 }
