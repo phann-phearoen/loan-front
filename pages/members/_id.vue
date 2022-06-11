@@ -1,5 +1,5 @@
 <template>
-  <v-card width="100%">
+  <v-card width="100%" v-if="oneMember">
     <v-card-title class="justify-center text-h5">
       គណណីរបស់ {{ oneMember.name }}
     </v-card-title>
