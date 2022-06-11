@@ -29,7 +29,7 @@
           <v-col cols="7">
             <div
               id="foundMember"
-              :class="getOneMember === selectedMember ? 'is-selected primary--text' : ''"
+              :class="getOneMember === getMemberToDeoposit ? 'is-selected primary--text' : ''"
             >
               <div class="d-inline mr-auto">
                 អត្តលេខ៖​ {{ getOneMember.id }}, 
@@ -37,7 +37,7 @@
                 ភេទ៖ {{ getOneMember.gender }}
               </div>
               <div
-                v-if="getOneMember === selectedMember"
+                v-if="getOneMember === getMemberToDeoposit"
                 class="d-inline ml-auto"
               >
                 <v-icon color="#2196F3">mdi-check</v-icon>
@@ -62,7 +62,7 @@
             </v-btn>
           </v-col>
         </v-row>
-        <v-row v-if="selectedMember">
+        <v-row v-if="getMemberToDeoposit">
           <v-col cols="7">
             <v-text-field
               label="បញ្ចូលចំនួនទឹកប្រាក់"
@@ -87,12 +87,12 @@
       </v-card-text>
     </v-card>
     <confirm-dialog :dialog="dialog">
-      <template v-if="selectedMember && amount">
+      <template v-if="getMemberToDeoposit && amount">
         <div>
-          <span>អត្តលេខ៖ </span><strong>{{ selectedMember.id }}</strong>
+          <span>អត្តលេខ៖ </span><strong>{{ getMemberToDeoposit.id }}</strong>
         </div>
         <div>
-          <span>ឈ្មោះ៖ </span><strong>{{ selectedMember.name }}</strong>
+          <span>ឈ្មោះ៖ </span><strong>{{ getMemberToDeoposit.name }}</strong>
         </div>
         <div>
           <span>ចំនួនទឹកប្រាក់៖ </span><strong>{{ amount }}៛</strong>
@@ -110,7 +110,6 @@ export default {
   data() {
     return {
       memberId: null,
-      selectedMember: null,
       amount: null,
       dialog: {
         model: false,
@@ -120,7 +119,7 @@ export default {
   },
   computed: {
     ...mapGetters('session', { me: 'getUser' }),
-    ...mapGetters('members', ['getOneMember']),
+    ...mapGetters('members', ['getOneMember', 'getMemberToDeoposit']),
   },
   methods: {
     async doFindMember() {
@@ -136,25 +135,28 @@ export default {
         .finally()
     },
     doSelectMember () {
-      this.selectedMember = this.getOneMember
+      this.getMemberToDeoposit = this.getOneMember
+      this.$store.commit('members/set_member_to_deposit', this.getOneMember)
     },
     doFindOtherMember() {
       this.$store.commit('members/set_one_member', null)
+      this.$store.commit('members/set_member_to_deposit', null)
       this.$refs.memberId.$refs.input.focus()
+      this.amount = null
     },
     async submit() {
       await this.$store
         .dispatch('members/apiNewDeposit', {
           amount: this.amount,
-          id: this.selectedMember.id,
+          id: this.getMemberToDeoposit.id,
         })
         .then((res) => {
           this.$nuxt.$emit('setSnackbar', res.data.message)
-          if (this.selectedMember.name === this.me.name) {
+          if (this.getMemberToDeoposit.name === this.me.name) {
             this.$router.push('/')
             return
           }
-          this.$router.push(`/members/${this.selectedMember.id}`)
+          this.$router.push(`/members/${this.getMemberToDeoposit.id}`)
         })
         .catch()
         .finally()
@@ -175,6 +177,7 @@ export default {
   beforeDestroy() {
     this.$nuxt.$off('confirmYes')
     this.$nuxt.$off('confirmNo')
+    this.$store.commit('members/set_member_to_deposit', null)
   },
 }
 </script>

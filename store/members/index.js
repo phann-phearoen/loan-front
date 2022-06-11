@@ -6,6 +6,7 @@ export const state = () => ({
   allMembers: [],
   thisMember: null,
   oneMember: null,
+  memberToDeposit: null,
 })
 
 export default {

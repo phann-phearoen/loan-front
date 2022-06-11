@@ -109,6 +109,7 @@ export default {
         .finally()
     },
     toDeposit() {
+      this.$store.commit('members/set_member_to_deposit', this.oneMember)
       this.$router.push('/deposit')
     },
     toRepay() {
@@ -116,8 +117,7 @@ export default {
     },
   },
   mounted() {
-    if (!this.oneMember)
-      this.fetchOneMember()
+    this.fetchOneMember()
   },
 }
 </script>

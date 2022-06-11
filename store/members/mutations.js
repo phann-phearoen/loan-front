@@ -8,4 +8,7 @@ export default {
   set_one_member(state, payload) {
     state.oneMember = payload
   },
+  set_member_to_deposit(state, payload) {
+    state.memberToDeposit = payload
+  },
 }
