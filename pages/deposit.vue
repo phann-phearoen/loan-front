@@ -135,7 +135,6 @@ export default {
         .finally()
     },
     doSelectMember () {
-      this.getMemberToDeoposit = this.getOneMember
       this.$store.commit('members/set_member_to_deposit', this.getOneMember)
     },
     doFindOtherMember() {
