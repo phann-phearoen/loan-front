@@ -100,14 +100,20 @@
           </v-col>
         </v-row>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions v-if="getMemberToLoan && amount && period">
       <v-spacer></v-spacer>
       <v-btn
-        v-if="getMemberToLoan && amount && period"
+        color="primary"
+        min-width="200"
+        @click="doCreateAgreementForMember"
+      >
+        បង្កើតកិច្ចសន្យា
+      </v-btn>
+      <v-btn
         color="primary"
         min-width="200"
       >
-        បង្កើតកិច្ចសន្យា
+        បង្កើតតារាងសងប្រាក់
       </v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
@@ -152,6 +158,15 @@ export default {
       this.$store.commit('members/set_member_to_loan', null)
       this.$refs.memberId.$refs.input.focus()
       this.amount = null
+    },
+    doCreateAgreementForMember() {
+      const obj = {
+        member: this.getMemberToLoan,
+        amount: this.amount,
+        period: this.period,
+      }
+      this.$store.commit('members/set_loan_object', obj)
+      this.$router.push('/agreement_member')
     },
   },
 }
