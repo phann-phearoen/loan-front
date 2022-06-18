@@ -78,6 +78,27 @@
             </v-btn>
           </v-col>
         </v-row>
+        <v-row v-if="getMemberToLoan">
+          <v-col>
+            <v-text-field
+              label="បញ្ចូលចំនួនទឹកប្រាក់"
+              hint="លេខរ៉ូម៉ាំង"
+              type="number"
+              suffix="៛"
+              v-model="amount"
+              :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              label="បញ្ចូលរយពេលជាខែ"
+              type="number"
+              suffix="ខែ"
+              v-model="period"
+              :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
+            ></v-text-field>
+          </v-col>
+        </v-row>
     </v-card-text>
   </v-card>
 </template>
@@ -90,6 +111,7 @@ export default {
       forMembers: true,
       memberId: null,
       amount: null,
+      period: null,
     }
   },
   computed: {
