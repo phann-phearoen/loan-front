@@ -100,6 +100,17 @@
           </v-col>
         </v-row>
     </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn
+        v-if="getMemberToLoan && amount && period"
+        color="primary"
+        min-width="200"
+      >
+        បង្កើតកិច្ចសន្យា
+      </v-btn>
+      <v-spacer></v-spacer>
+    </v-card-actions>
   </v-card>
 </template>
 
