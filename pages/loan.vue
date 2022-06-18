@@ -45,7 +45,7 @@
           <v-col cols="7">
             <div
               id="foundMember"
-              :class="getOneMember === getMemberToDeoposit ? 'is-selected primary--text' : ''"
+              :class="getOneMember === getMemberToLoan ? 'is-selected primary--text' : ''"
             >
               <div class="d-inline mr-auto">
                 អត្តលេខ៖​ {{ getOneMember.id }}, 
@@ -53,7 +53,7 @@
                 ភេទ៖ {{ getOneMember.gender }}
               </div>
               <div
-                v-if="getOneMember === getMemberToDeoposit"
+                v-if="getOneMember === getMemberToLoan"
                 class="d-inline ml-auto"
               >
                 <v-icon color="#2196F3">mdi-check</v-icon>
@@ -89,11 +89,13 @@ export default {
     return {
       forMembers: true,
       memberId: null,
+      amount: null,
     }
   },
   computed: {
     ...mapGetters('members', [
-      'getOneMember'
+      'getOneMember',
+      'getMemberToLoan'
     ]),
   },
   methods: {
@@ -110,11 +112,28 @@ export default {
         .finally()
     },
     doSelectMember() {
-
+      this.$store.commit('members/set_member_to_loan', this.getOneMember)
     },
     doFindOtherMember() {
-      
+      this.$store.commit('members/set_one_member', null)
+      this.$store.commit('members/set_member_to_loan', null)
+      this.$refs.memberId.$refs.input.focus()
+      this.amount = null
     },
   },
 }
 </script>
+
+<style scoped>
+#foundMember {
+  display: flex;
+  width: 100%;
+  border: 1px grey solid;
+  border-radius: 5px;
+  padding: .5em;
+  font-size: 1.2em;
+}
+.is-selected {
+  border: 1px #2196F3 solid !important;
+}
+</style>
