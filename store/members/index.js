@@ -8,6 +8,7 @@ export const state = () => ({
   oneMember: null,
   memberToDeposit: null,
   memberToLoan: null,
+  loanObject: null,
 })
 
 export default {

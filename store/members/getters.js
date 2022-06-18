@@ -4,4 +4,5 @@ export default {
   getOneMember: (state) => state.oneMember,
   getMemberToDeoposit: (state) => state.memberToDeposit,
   getMemberToLoan: (state) => state.memberToLoan,
+  getLoanObject: (state) => state.loanObject,
 }

@@ -14,4 +14,7 @@ export default {
   set_member_to_loan(state, payload) {
     state.memberToLoan = payload
   },
+  set_loan_object(state, payload) {
+    state.loanObject = payload
+  },
 }
