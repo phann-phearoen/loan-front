@@ -28,15 +28,13 @@ export default {
     return await new Promise((resolve, reject) => {
       securedInst
         .post(`/api/v1/members/create_new_member`, {
-          params: {
-            name: payload.name,
-            gender: payload.gender,
-            date_of_birth: payload.dateOfBirth,
-            national_id: payload.nationalId,
-            phone: payload.phone,
-            address: payload.address,
-            is_client: payload.is_client || false,
-          }
+          name: payload.name,
+          gender: payload.gender,
+          date_of_birth: payload.dateOfBirth,
+          national_id: payload.nationalId,
+          phone: payload.phone,
+          address: payload.address,
+          is_client: payload.isClient || false,
         })
         .then((resp) => {
           const obj = resp.data

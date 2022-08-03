@@ -147,6 +147,7 @@ export default {
       required: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ' ],
       idRules: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ', v => v.length === 8 || 'លេខអត្តសញ្ញាណប័ណ្ឌ៨ខ្ទង់' ],
       confirmForm: false,
+      isLoading: false,
     }
   },
   computed: {
@@ -174,15 +175,19 @@ export default {
       this.address = ''
     },
     async submit() {
+      this.isLoading = true
       await this.$store
         .dispatch('members/apiCreateNewMember', {
           name: this.name,
           gender: this.gender,
           dateOfBirth: this.dateOfBirth,
-          national_id: this.nationalId,
+          nationalId: this.nationalId,
           phone: this.phone,
           address: this.address,
         })
+        .then((resp) => {})
+        .catch()
+        .finally(() => this.isLoading = false)
     },
   },
 }
