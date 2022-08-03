@@ -1,3 +1,63 @@
 <template>
-  <div>new member page</div>
+  <v-container>
+    <v-card>
+      <v-card-title>ព័ត៌មានសមាជិកថ្មី</v-card-title>
+      <v-divider></v-divider>
+      <v-card-text>
+        <v-form ref="form" lazy-validation>
+          <v-text-field
+            label="ឈ្មោះ"
+            outlined
+            v-model="name"
+          ></v-text-field>
+          <v-text-field
+            label="ថ្ងៃខែឆ្នាំកំណើត"
+            outlined
+            append-icon="mdi-calendar-range"
+            v-model="dateOfBirth"
+            @click:append="datePicker = true"
+          ></v-text-field>
+        </v-form>
+      </v-card-text>
+    </v-card>
+    <v-dialog v-model="datePicker" max-width="320">
+      <v-card>
+        <v-card-title>ជ្រើសរើសថ្ងៃខែឆ្នាំ</v-card-title>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-date-picker
+            full-width
+            v-model="dateOfBirth"
+          ></v-date-picker>
+        </v-card-actions>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn @click="datePicker = false; dateOfBirth = null">លុប</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+            :disabled="!dateOfBirth"
+            color="primary"
+            @click="datePicker = false"
+          >ជ្រើសរើស</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-container>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: '',
+      gender: null,
+      dateOfBirth: null,
+      datePicker: false,
+      nationalId: '',
+      phone: '',
+      address: '',
+      required: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ' ],
+    }
+  },
+}
+</script>
