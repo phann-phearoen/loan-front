@@ -185,7 +185,13 @@ export default {
           phone: this.phone,
           address: this.address,
         })
-        .then((resp) => {})
+        .then((resp) => {
+          this.$nuxt.$emit('setSnackbar', {
+            text: 'សមាជិកថ្មីត្រូវបានបង្កើត',
+            type: 'info',
+          })
+          this.clearForm()
+        })
         .catch()
         .finally(() => { 
           this.isLoading = false

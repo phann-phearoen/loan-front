@@ -42,7 +42,7 @@
     </v-footer>
     <v-snackbar
       v-model="snackbar.model"
-      color="primary"
+      :color="snackbarColor"
       outlined
       timeout="3000"
     >
@@ -103,6 +103,7 @@ export default {
       snackbar: {
         model: false,
         text: '',
+        type: 'info',
       },
     }
   },
@@ -111,9 +112,19 @@ export default {
       this.$vuetify.theme.dark = false
     },
     ...mapGetters('session', ['isLoggedIn']),
+    snackbarColor() {
+      if(this.snackbar.type === 'info') return 'primary'
+      if(this.snackbar.type === 'error') return 'red'
+    },
   },
   methods: {
     setSnackbar(val) {
+      if(typeof val === 'object') {
+        this.snackbar.text = val.text
+        this.snackbar.type = val.type
+        this.snackbar.model = true
+        return
+      }
       this.snackbar.model = true
       this.snackbar.text = val
     },
