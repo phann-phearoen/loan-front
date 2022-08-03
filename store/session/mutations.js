@@ -15,28 +15,29 @@ export default {
 
   SET_USER(state, user) {
     state.user = user
+    sessionStorage.setItem('user', JSON.stringify(user))
   },
   auth_request(state) {
     state.status = 'loading'
-    localStorage.setItem('status', 'loading')
+    sessionStorage.setItem('status', 'loading')
   },
   auth_success(state, token) {
     state.token = token
     state.status = 'success'
-    localStorage.setItem('token', token)
-    localStorage.setItem('status', 'success')
+    sessionStorage.setItem('token', token)
+    sessionStorage.setItem('status', 'success')
   },
   auth_error(state) {
     state.status = 'error'
-    localStorage.setItem('status', 'error')
-    localStorage.removeItem('token')
+    sessionStorage.setItem('status', 'error')
+    sessionStorage.removeItem('token')
   },
   SET_LOGOUT(state) {
     state.status = ''
     state.token = ''
     state.user = {}
-    localStorage.removeItem('token')
-    localStorage.setItem('status', 'logged out')
+    sessionStorage.removeItem('token')
+    sessionStorage.setItem('status', 'logged out')
     
     const initial = initialState()
     Object.keys(initial).forEach((key) => {

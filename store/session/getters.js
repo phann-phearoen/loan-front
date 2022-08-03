@@ -1,6 +1,8 @@
 export default {
-  isLoggedIn: (state) => !!state.token && !!state.user,
-  getToken: (state) => state.token,
+  isLoggedIn: () => {
+    return !!sessionStorage.getItem('token') && !!sessionStorage.getItem('user') ? true : false
+  },
+  getToken: () => sessionStorage.getItem('token') || null,
   getIpAddr: (state) => state.ip_addr || '',
-  getUser: (state) => state.user,
+  getUser: (state) => state.user || JSON.parse(sessionStorage.getItem('user')),
 }
