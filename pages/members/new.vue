@@ -187,7 +187,10 @@ export default {
         })
         .then((resp) => {})
         .catch()
-        .finally(() => this.isLoading = false)
+        .finally(() => { 
+          this.isLoading = false
+          this.confirmForm = false
+        })
     },
   },
 }

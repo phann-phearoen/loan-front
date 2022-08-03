@@ -41,7 +41,6 @@ export default {
           if (!obj) {
             reject(new Error('API return value is wrong'))
           }
-          console.log(obj)
           resolve(resp)
         })
         .catch((err) => {})
