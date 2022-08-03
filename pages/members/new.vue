@@ -11,6 +11,15 @@
             v-model="name"
             :rules="required"
           ></v-text-field>
+          <div>ភេទ</div>
+          <v-radio-group v-model="gender">
+            <v-radio
+              v-for="item in genderGroup"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></v-radio>
+          </v-radio-group>
           <v-text-field
             label="ថ្ងៃខែឆ្នាំកំណើត"
             outlined
@@ -70,6 +79,12 @@
           ></v-text-field>
           <v-text-field
             readonly
+            label="ភេទ"
+            outlined
+            v-model="gender"
+          ></v-text-field>
+          <v-text-field
+            readonly
             label="ថ្ងៃខែឆ្នាំកំណើត"
             outlined
             type="date"
@@ -114,6 +129,16 @@ export default {
       form: null,
       name: '',
       gender: null,
+      genderGroup: [
+        {
+          label: 'ស្រី',
+          value: 'F',
+        },
+        {
+          label: 'ប្រុស',
+          value: 'M',
+        },
+      ],
       dateOfBirth: null,
       datePicker: false,
       nationalId: '',
@@ -148,8 +173,16 @@ export default {
       this.phone = ''
       this.address = ''
     },
-    submit() {
-      console.log(this.form)
+    async submit() {
+      await this.$store
+        .dispatch('members/apiCreateNewMember', {
+          name: this.name,
+          gender: this.gender,
+          dateOfBirth: this.dateOfBirth,
+          national_id: this.nationalId,
+          phone: this.phone,
+          address: this.address,
+        })
     },
   },
 }

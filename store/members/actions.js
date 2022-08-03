@@ -24,6 +24,31 @@ import axios from 'axios'
   })
   
 export default {
+  async apiCreateNewMember({ dispatch, commit }, payload) {
+    return await new Promise((resolve, reject) => {
+      securedInst
+        .post(`/api/v1/members/create_new_member`, {
+          params: {
+            name: payload.name,
+            gender: payload.gender,
+            date_of_birth: payload.dateOfBirth,
+            national_id: payload.nationalId,
+            phone: payload.phone,
+            address: payload.address,
+            is_client: payload.is_client || false,
+          }
+        })
+        .then((resp) => {
+          const obj = resp.data
+          if (!obj) {
+            reject(new Error('API return value is wrong'))
+          }
+          console.log(obj)
+          resolve(resp)
+        })
+        .catch((err) => {})
+    })
+  },
   async getAllMembers({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
