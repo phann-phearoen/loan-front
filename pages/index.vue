@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-if="isLoggedIn && getThisMember && getUser"
+    v-if="isLoggedIn && getUser"
   >
     <v-card-title class="justify-center text-h5">គណនីរបស់ខ្ញុំ</v-card-title>
     <v-divider></v-divider>
@@ -49,7 +49,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ getThisMember.total_deposit }} ៛
+          {{ getUser.total_deposit }} ៛
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -122,23 +122,14 @@ export default {
   name: 'IndexPage',
   computed: {
     ...mapGetters('session', ['getUser', 'isLoggedIn']),
-    ...mapGetters('members', ['getThisMember'])
   },
   methods: {
     toDeposit() { this.$router.push('/deposit') },
-    async fetchThisMember() {
-      await this.$store
-        .dispatch('members/getThisMember')
-        .then()
-        .finally()
-    },
   },
   mounted() {
     if (!this.isLoggedIn) {
       this.$router.replace('/login')
     }
-    if (this.isLoggedIn)
-      this.fetchThisMember()
   },
   beforeDestroy() {
     this.$store.commit('members/set_one_member', null)
