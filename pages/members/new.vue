@@ -14,6 +14,7 @@
           <v-text-field
             label="ថ្ងៃខែឆ្នាំកំណើត"
             outlined
+            type="date"
             append-icon="mdi-calendar-range"
             v-model="dateOfBirth"
             @click:append="datePicker = true"
@@ -41,6 +42,21 @@
           ></v-text-field>
         </v-form>
       </v-card-text>
+      <v-card-actions>
+        <v-btn
+          min-width="150"
+          @click="clearForm"
+        >
+          លុប
+        </v-btn>
+        <v-btn
+          min-width="150"
+          color="primary"
+          @click="proceedForm"
+        >
+          រក្សារទុក
+        </v-btn>
+      </v-card-actions>
     </v-card>
     <v-dialog v-model="datePicker" max-width="320">
       <v-card>
@@ -81,6 +97,19 @@ export default {
       required: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ' ],
       idRules: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ', v => v.length === 8 || 'លេខអត្តសញ្ញាណប័ណ្ឌ៨ខ្ទង់' ],
     }
+  },
+  methods: {
+    clearForm() {
+      this.name = ''
+      this.gender = null
+      this.dateOfBirth = null
+      this.nationalId = ''
+      this.phone = ''
+      this.address = ''
+    },
+    proceedForm() {
+
+    },
   },
 }
 </script>
