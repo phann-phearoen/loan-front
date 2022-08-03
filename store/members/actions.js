@@ -27,7 +27,7 @@ export default {
   async getAllMembers({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .get(`/api/v1/members`, {
+        .get(`/api/v1/users/get_all_members`, {
           params: {
             page: payload.page,
             per: payload.itemsPerPage,
@@ -35,6 +35,7 @@ export default {
         })
         .then((resp) => {
           const obj = resp.data
+          console.log(obj)
           if (!obj) {
             reject(new Error('API return value is wrong'))
           }
