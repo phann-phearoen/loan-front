@@ -1,7 +1,16 @@
 <template>
   <v-container>
     <v-card width="100%">
-      <v-card-title class="justify-center">បញ្ជីសមាជិក</v-card-title>
+      <v-card-title>
+        <div>បញ្ជីសមាជិក</div>
+        <v-btn
+          class="d-block ml-auto"
+          color="primary"
+          @click="addNewMember"
+        >
+          បន្ថែមសមាជិកថ្មី
+        </v-btn>
+      </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
         <v-data-table
@@ -94,6 +103,9 @@ export default {
     },
     doGoToTheMember(member) {
       this.$router.push(`/members/${member.id}`)
+    },
+    addNewMember() {
+      this.$router.push('/members/new')
     },
   },
   mounted() {
