@@ -4,7 +4,7 @@
       <v-card-title>ព័ត៌មានសមាជិកថ្មី</v-card-title>
       <v-divider></v-divider>
       <v-card-text>
-        <v-form ref="form" lazy-validation>
+        <v-form ref="form" v-model="form" lazy-validation>
           <v-text-field
             label="ឈ្មោះ"
             outlined
@@ -50,6 +50,7 @@
           លុប
         </v-btn>
         <v-btn
+          :disabled="!formValid"
           min-width="150"
           color="primary"
           @click="proceedForm"
@@ -87,6 +88,7 @@
 export default {
   data() {
     return {
+      form: null,
       name: '',
       gender: null,
       dateOfBirth: null,
@@ -98,6 +100,21 @@ export default {
       idRules: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ', v => v.length === 8 || 'លេខអត្តសញ្ញាណប័ណ្ឌ៨ខ្ទង់' ],
     }
   },
+  computed: {
+    formValid() {
+      if(
+        this.form &&
+        this.name !== '' &&
+        this.dateOfBirth !== null &&
+        this.nationalId !== '' &&
+        this.phone !== '' &&
+        this.address !== ''
+      ) {
+        return true
+      }
+      return false
+    },
+  },
   methods: {
     clearForm() {
       this.name = ''
@@ -108,7 +125,7 @@ export default {
       this.address = ''
     },
     proceedForm() {
-
+      console.log(this.form)
     },
   },
 }
