@@ -15,9 +15,7 @@
             label="ថ្ងៃខែឆ្នាំកំណើត"
             outlined
             type="date"
-            append-icon="mdi-calendar-range"
             v-model="dateOfBirth"
-            @click:append="datePicker = true"
           ></v-text-field>
           <v-text-field
             label="លេខអត្តសញ្ញាណប័ណ្ឌ"
@@ -53,31 +51,56 @@
           :disabled="!formValid"
           min-width="150"
           color="primary"
-          @click="proceedForm"
+          @click="confirmForm = true"
         >
           រក្សារទុក
         </v-btn>
       </v-card-actions>
     </v-card>
-    <v-dialog v-model="datePicker" max-width="320">
-      <v-card>
-        <v-card-title>ជ្រើសរើសថ្ងៃខែឆ្នាំ</v-card-title>
+    <v-dialog v-model="confirmForm" max-width="80%">
+      <v-card width="100%">
+        <v-card-title>បញ្ជាក់ទិន្ន័យ</v-card-title>
         <v-divider></v-divider>
-        <v-card-actions>
-          <v-date-picker
-            full-width
+        <v-card-text class="mt-4">
+          <v-text-field
+            readonly
+            label="ឈ្មោះ"
+            outlined
+            v-model="name"
+          ></v-text-field>
+          <v-text-field
+            readonly
+            label="ថ្ងៃខែឆ្នាំកំណើត"
+            outlined
+            type="date"
             v-model="dateOfBirth"
-          ></v-date-picker>
-        </v-card-actions>
+          ></v-text-field>
+          <v-text-field
+            readonly
+            label="លេខអត្តសញ្ញាណប័ណ្ឌ"
+            outlined
+            type="number"
+            counter="8"
+            v-model="nationalId"
+          ></v-text-field>
+          <v-text-field
+            readonly
+            label="លេខទូរស័ព្ទ"
+            outlined
+            v-model="phone"
+            type="number"
+          ></v-text-field>
+          <v-text-field
+            readonly
+            label="អាស័យដ្ឋាន"
+            outlined
+            v-model="address"
+          ></v-text-field>
+        </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn @click="datePicker = false; dateOfBirth = null">លុប</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn
-            :disabled="!dateOfBirth"
-            color="primary"
-            @click="datePicker = false"
-          >ជ្រើសរើស</v-btn>
+          <v-btn min-width="150" @click="confirmForm = false">ត្រឡប់</v-btn>
+          <v-btn min-width="150" color="primary" @click="submit">រក្សារទុក</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -98,6 +121,7 @@ export default {
       address: '',
       required: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ' ],
       idRules: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ', v => v.length === 8 || 'លេខអត្តសញ្ញាណប័ណ្ឌ៨ខ្ទង់' ],
+      confirmForm: false,
     }
   },
   computed: {
@@ -124,7 +148,7 @@ export default {
       this.phone = ''
       this.address = ''
     },
-    proceedForm() {
+    submit() {
       console.log(this.form)
     },
   },
