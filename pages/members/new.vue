@@ -9,6 +9,7 @@
             label="ឈ្មោះ"
             outlined
             v-model="name"
+            :rules="required"
           ></v-text-field>
           <v-text-field
             label="ថ្ងៃខែឆ្នាំកំណើត"
@@ -16,6 +17,27 @@
             append-icon="mdi-calendar-range"
             v-model="dateOfBirth"
             @click:append="datePicker = true"
+          ></v-text-field>
+          <v-text-field
+            label="លេខអត្តសញ្ញាណប័ណ្ឌ"
+            outlined
+            type="number"
+            counter="8"
+            v-model="nationalId"
+            :rules="idRules"
+          ></v-text-field>
+          <v-text-field
+            label="លេខទូរស័ព្ទ"
+            outlined
+            v-model="phone"
+            type="number"
+            :rules="required"
+          ></v-text-field>
+          <v-text-field
+            label="អាស័យដ្ឋាន"
+            outlined
+            v-model="address"
+            :rules="required"
           ></v-text-field>
         </v-form>
       </v-card-text>
@@ -57,6 +79,7 @@ export default {
       phone: '',
       address: '',
       required: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ' ],
+      idRules: [ v => !!v || 'ចាំបាច់ត្រូវបញ្ចូលទិន្ន័យ', v => v.length === 8 || 'លេខអត្តសញ្ញាណប័ណ្ឌ៨ខ្ទង់' ],
     }
   },
 }
