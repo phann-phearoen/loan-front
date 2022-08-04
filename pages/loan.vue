@@ -166,7 +166,8 @@ export default {
         period: this.period,
       }
       this.$store.commit('members/set_loan_object', obj)
-      this.$router.push('/agreement_member')
+      sessionStorage.setItem('loanObject', JSON.stringify(obj))
+      window.open(`/agreement_member`)
     },
   },
 }

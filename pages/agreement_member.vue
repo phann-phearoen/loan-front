@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="getLoanObject" width="100%">
+  <v-card v-if="loanObject" width="100%">
     <v-card-text>
       <div class="text-center title">
         ព្រះរាជាណាចករកម្ពុជា<br>
@@ -7,11 +7,11 @@
         កិច្ចសន្យាខ្ចីចងការប្រាក់
       </div>
       <div class="normal mt-12" style="min-height: 500px">
-        សមាជិកក្រុមអត្តលេខ {{ getLoanObject.member.id }}<br>
-        ឈ្មោះ {{ getLoanObject.member.name }}<br>
-        ចំនួន {{ getLoanObject.amount }} រៀល<br>
+        សមាជិកក្រុមអត្តលេខ {{ loanObject.member.id }}<br>
+        ឈ្មោះ {{ loanObject.member.name }}<br>
+        ចំនួន {{ loanObject.amount }} រៀល<br>
         ការប្រាក់​ ១%<br>
-        រយៈពេល {{ getLoanObject.period }} ខែ។
+        រយៈពេល {{ loanObject.period }} ខែ។
       </div>
       <v-row
         justify="center"
@@ -39,10 +39,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters('members', ['getLoanObject']),
+    loanObject() {
+      return JSON.parse(sessionStorage.getItem('loanObject'))
+    },
+  },
+  mounted() {
+    console.log(this.loanObject)
+  },
+  beforeDestroy() {
+    sessionStorage.removeItem('loanObject')
   },
 }
 </script>
