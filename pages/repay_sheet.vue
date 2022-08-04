@@ -40,16 +40,16 @@
           <div class="subtitle">{{ row.date }}</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">{{ row.remain }}</div>
+          <div class="subtitle">{{ row.remain > 0 ? row.remain : 0 }}៛</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">{{ row.offSet }}</div>
+          <div class="subtitle">{{ row.offSet }}៛</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">{{ row.interest }}</div>
+          <div class="subtitle">{{ row.interest }}៛</div>
         </v-col>
         <v-col>
-          <div class="subtitle">{{ row.payment }}</div>
+          <div class="subtitle">{{ row.payment }}៛</div>
         </v-col>
       </v-row>
     </v-card-text>
@@ -81,7 +81,7 @@ export default {
         obj["offSet"] = Math.ceil(this.loanObject.amount / this.loanObject.period),
         obj["interest"] = Math.ceil(stake * this.loanObject.rate),
         obj["payment"] = obj.offSet + obj.interest
-        obj["remain"] = stake - obj.payment
+        obj["remain"] = stake - obj.offSet
         stake -= obj.offSet
         this.rows.push(obj)
         i++
