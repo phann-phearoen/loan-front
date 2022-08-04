@@ -79,7 +79,7 @@
           </v-col>
         </v-row>
         <v-row v-if="getMemberToLoan">
-          <v-col>
+          <v-col cols="12">
             <v-text-field
               label="បញ្ចូលចំនួនទឹកប្រាក់"
               hint="លេខរ៉ូម៉ាំង"
@@ -89,12 +89,20 @@
               :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
             ></v-text-field>
           </v-col>
-          <v-col>
+          <v-col cols="12">
             <v-text-field
               label="បញ្ចូលរយពេលជាខែ"
               type="number"
               suffix="ខែ"
               v-model="period"
+              :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-text-field
+              label="អត្រាការប្រាក់"
+              suffix="%"
+              v-model="rate"
               :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
             ></v-text-field>
           </v-col>
@@ -130,7 +138,7 @@ export default {
       memberId: null,
       amount: null,
       period: null,
-      rate: .03,
+      rate: 3,
     }
   },
   computed: {
@@ -175,7 +183,7 @@ export default {
       const obj = {
         amount: this.amount,
         period: this.period,
-        rate: this.rate,
+        rate: this.rate / 100,
       }
       sessionStorage.setItem('loanObject', JSON.stringify(obj))
       window.open('/repay_sheet')
