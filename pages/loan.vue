@@ -130,6 +130,7 @@ export default {
       memberId: null,
       amount: null,
       period: null,
+      rate: .03,
     }
   },
   computed: {
@@ -172,7 +173,7 @@ export default {
     },
     doCreateRepaySheet() {
       const obj = {
-        amoutn: this.amount,
+        amount: this.amount,
         period: this.period,
         rate: this.rate,
       }

@@ -7,8 +7,11 @@
       </div>
     </v-card-title>
     <v-divider></v-divider>
-    <v-card-text>
+    <v-card-text v-if="rows.length > 0">
       <v-row class="th">
+        <v-col class="br" cols="1">
+          <div class="subtitle">លេខរៀង</div>
+        </v-col>
         <v-col class="br">
           <div class="subtitle">ថ្ងៃខែត្រូវបង់</div>
         </v-col>
@@ -25,21 +28,28 @@
           <div class="subtitle">ប្រាក់ត្រូវបង់</div>
         </v-col>
       </v-row>
-      <v-row class="tr">
-        <v-col class="br">
-          <div class="subtitle">ថ្ងៃខែត្រូវបង់</div>
+      <v-row
+        v-for="(row, i) in rows"
+        :key="i"
+        class="tr"
+      >
+        <v-col class="br" cols="1">
+          <div class="subtitle">{{ i + 1 }}</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">ប្រាក់ដើមនៅសល់</div>
+          <div class="subtitle">{{ row.date }}</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">ប្រាក់ដើមរំលស់</div>
+          <div class="subtitle">{{ row.remain }}</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">ប្រាក់ការ</div>
+          <div class="subtitle">{{ row.offSet }}</div>
+        </v-col>
+        <v-col class="br">
+          <div class="subtitle">{{ row.interest }}</div>
         </v-col>
         <v-col>
-          <div class="subtitle">ប្រាក់ត្រូវបង់</div>
+          <div class="subtitle">{{ row.payment }}</div>
         </v-col>
       </v-row>
     </v-card-text>
@@ -61,10 +71,24 @@ export default {
   },
   methods: {
     calcRows() {
-      this.loanObject.forEach((e) => {
-        
-      })
+      let stake = this.loanObject.amount
+      let i = 1
+      var d = new Date()
+      while (i <= this.loanObject.period) {
+        const obj = {}
+        obj["date"] = d.setMonth(d.getMonth() + i)
+        obj["offSet"] = Math.ceil(this.loanObject.amount / this.loanObject.period),
+        obj["interest"] = Math.ceil(stake * this.loanObject.rate),
+        obj["payment"] = obj.offSet + obj.interest
+        obj["remain"] = stake - obj.payment
+        stake -= obj.offSet
+        this.rows.push(obj)
+        i++
+      }
     },
+  },
+  mounted() {
+    this.calcRows()
   },
 }
 </script>
