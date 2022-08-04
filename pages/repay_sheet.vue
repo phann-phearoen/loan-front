@@ -76,7 +76,8 @@ export default {
       var d = new Date()
       while (i <= this.loanObject.period) {
         const obj = {}
-        obj["date"] = d.setMonth(d.getMonth() + i)
+        let nextDate = new Date(d.setMonth(d.getMonth() + 1))
+        obj["date"] = nextDate.toISOString().slice(0, 10)
         obj["offSet"] = Math.ceil(this.loanObject.amount / this.loanObject.period),
         obj["interest"] = Math.ceil(stake * this.loanObject.rate),
         obj["payment"] = obj.offSet + obj.interest
@@ -99,7 +100,7 @@ export default {
   font-weight: 600;
 }
 .sub-title {
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 .th {
   border: 1px solid grey;
