@@ -25,7 +25,14 @@
           hide-default-footer
           :items-per-page="pagination.itemsPerPage"
           @click:row="doGoToTheMember"
-        ></v-data-table>
+        >
+          <template #[`item.deposit`]="{ item }">
+            <div>{{ item.deposit ? item.deposit.amount : 0 }}៛</div>
+          </template>
+          <template #[`item.loan`]="{ item }">
+            <div>{{ item.loan ? item.loan.amount : 0 }}៛</div>
+          </template>
+        </v-data-table>
       </v-card-text>
       <v-card-actions class="justify-space-around">
         <v-select
@@ -67,7 +74,7 @@ export default {
         { text: 'ឈ្មោះ', value: 'name' },
         { text: 'ភេទ', value: 'gender' },
         { text: 'លេខទូរស័ព្ទ', value: 'phone' },
-        { text: 'ប្រាក់សន្សំសរុប', value: 'total_deposit' },
+        { text: 'ប្រាក់សន្សំសរុប', value: 'deposit' },
         { text: 'ប្រាក់កម្ចីសរុប', value: 'loan' },
       ],
       isLoading: false,

@@ -46,7 +46,7 @@ export default {
         .catch((err) => {})
     })
   },
-  async getAllMembers({ state, dispatch, commit }, payload) {
+  async getAllMembers({ dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
         .get(`/api/v1/members/get_all_members`, {
