@@ -150,7 +150,7 @@ export default {
           id: this.getMemberToDeoposit.id,
         })
         .then((res) => {
-          this.$nuxt.$emit('setSnackbar', res.data.message)
+          this.$nuxt.$emit('setSnackbar', 'ប្រតិបត្តិការជោគជ័យ')
           if (this.getMemberToDeoposit.name === this.me.name) {
             this.$router.push('/')
             return
