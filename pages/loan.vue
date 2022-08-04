@@ -112,6 +112,7 @@
       <v-btn
         color="primary"
         min-width="200"
+        @click="doCreateRepaySheet"
       >
         បង្កើតតារាងសងប្រាក់
       </v-btn>
@@ -168,6 +169,15 @@ export default {
       this.$store.commit('members/set_loan_object', obj)
       sessionStorage.setItem('loanObject', JSON.stringify(obj))
       window.open(`/agreement_member`)
+    },
+    doCreateRepaySheet() {
+      const obj = {
+        amoutn: this.amount,
+        period: this.period,
+        rate: this.rate,
+      }
+      sessionStorage.setItem('loanObject', JSON.stringify(obj))
+      window.open('/repay_sheet')
     },
   },
 }
