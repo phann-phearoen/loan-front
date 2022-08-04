@@ -40,16 +40,16 @@
           <div class="subtitle">{{ row.date }}</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">{{ row.remain > 0 ? row.remain : 0 }}៛</div>
+          <div class="subtitle">{{ row.remain > 0 ? row.remain.toLocaleString() : 0 }}៛</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">{{ row.offSet }}៛</div>
+          <div class="subtitle">{{ row.offSet.toLocaleString() }}៛</div>
         </v-col>
         <v-col class="br">
-          <div class="subtitle">{{ row.interest }}៛</div>
+          <div class="subtitle">{{ row.interest.toLocaleString() }}៛</div>
         </v-col>
         <v-col>
-          <div class="subtitle">{{ row.payment }}៛</div>
+          <div class="subtitle">{{ row.payment.toLocaleString() }}៛</div>
         </v-col>
       </v-row>
     </v-card-text>
@@ -78,10 +78,10 @@ export default {
         const obj = {}
         let nextDate = new Date(d.setMonth(d.getMonth() + 1))
         obj["date"] = nextDate.toISOString().slice(0, 10)
-        obj["offSet"] = Math.ceil(this.loanObject.amount / this.loanObject.period),
-        obj["interest"] = Math.ceil(stake * this.loanObject.rate),
-        obj["payment"] = obj.offSet + obj.interest
-        obj["remain"] = stake - obj.offSet
+        obj["offSet"] = Math.ceil((this.loanObject.amount / this.loanObject.period) / 100) * 100,
+        obj["interest"] = Math.ceil((stake * this.loanObject.rate) / 100) * 100
+        obj["payment"] = Math.ceil((obj.offSet + obj.interest) / 100) * 100
+        obj["remain"] = Math.ceil((stake - obj.offSet) / 100) * 100
         stake -= obj.offSet
         this.rows.push(obj)
         i++
