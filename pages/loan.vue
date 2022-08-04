@@ -160,13 +160,15 @@ export default {
       this.amount = null
     },
     doCreateAgreementForMember() {
-      const obj = {
-        member: this.getMemberToLoan,
-        amount: this.amount,
-        period: this.period,
+      
+      const loanObject = {
+        loanProvider: loanProvider,
+        loanTaker: loanTaker,
+        loan: loan,
+        pawn: pawn,
       }
-      this.$store.commit('members/set_loan_object', obj)
-      sessionStorage.setItem('loanObject', JSON.stringify(obj))
+      sessionStorage.setItem('loanObject', JSON.stringify(loanObject))
+      console.log(loanObject)
       window.open(`/agreement_member`)
     },
   },
