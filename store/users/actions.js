@@ -7,13 +7,13 @@ import axios from 'axios'
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${inBrowser ? localStorage.getItem('token') : ''}`,
+      Authorization: `Bearer ${inBrowser ? sessionStorage.getItem('token') : ''}`,
     },
   })
   securedInst.interceptors.request.use((config) => {
     const method = config.method.toUpperCase()
     if (method !== 'OPTIONS') {
-      const token = `${inBrowser ? localStorage.getItem('token') : ''}`
+      const token = `${inBrowser ? sessionStorage.getItem('token') : ''}`
       config.headers = {
         ...config.headers,
         'Access-Control-Allow-Origin': '*',

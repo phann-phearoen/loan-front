@@ -7,13 +7,13 @@ import axios from 'axios'
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${inBrowser ? localStorage.getItem('token') : ''}`,
+      Authorization: `Bearer ${inBrowser ? sessionStorage.getItem('token') : ''}`,
     },
   })
   securedInst.interceptors.request.use((config) => {
     const method = config.method.toUpperCase()
     if (method !== 'OPTIONS') {
-      const token = `${inBrowser ? localStorage.getItem('token') : ''}`
+      const token = `${inBrowser ? sessionStorage.getItem('token') : ''}`
       config.headers = {
         ...config.headers,
         'Access-Control-Allow-Origin': '*',
@@ -107,12 +107,13 @@ export default {
   async apiNewDeposit({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .put(`/api/v1/members/deposit`, {
+        .post(`/api/v1/deposits/new_deposit`, {
           id: payload.id,
           amount: payload.amount,
         })
         .then((resp) => {
           const obj = resp.data
+          console.log(resp)
           if (!obj) {
             reject(new Error('API return value is wrong'))
           }
