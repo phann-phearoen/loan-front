@@ -49,7 +49,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ oneMember.total_deposit }} ៛
+          {{ oneMember.deposit }} ៛
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -92,11 +92,6 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  data() {
-    return {
-
-    }
-  },
   computed: {
     id() { return this.$route.params.id },
     ...mapGetters('members', { oneMember: 'getOneMember' }),
