@@ -27,10 +27,10 @@
           @click:row="doGoToTheMember"
         >
           <template #[`item.deposit`]="{ item }">
-            <div>{{ item.deposit ? item.deposit.amount : 0 }}៛</div>
+            <div>{{ item.deposit ? item.deposit : 0 }}៛</div>
           </template>
           <template #[`item.loan`]="{ item }">
-            <div>{{ item.loan ? item.loan.amount : 0 }}៛</div>
+            <div>{{ item.loan ? item.loan : 0 }}៛</div>
           </template>
         </v-data-table>
       </v-card-text>
