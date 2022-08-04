@@ -40,6 +40,7 @@
 
 <script>
 export default {
+  layout: 'agreement',
   computed: {
     loanObject() {
       return JSON.parse(sessionStorage.getItem('loanObject'))
