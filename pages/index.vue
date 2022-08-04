@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-if="isLoggedIn && getUser"
+    v-if="isLoggedIn && me"
   >
     <v-card-title class="justify-center text-h5">គណនីរបស់ខ្ញុំ</v-card-title>
     <v-divider></v-divider>
@@ -17,7 +17,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ getUser.name }}
+          {{ me.name }}
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -33,7 +33,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ getUser.gender }}
+          {{ me.gender }}
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -49,7 +49,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ getUser.total_deposit }} ៛
+          {{ me.deposit ? me.deposit : 0 }} ៛
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -65,7 +65,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ getUser.total_deposit }} ៛
+          {{ me.loan ? me.loan : 0 }} ៛
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -122,14 +122,22 @@ export default {
   name: 'IndexPage',
   computed: {
     ...mapGetters('session', ['getUser', 'isLoggedIn']),
+    ...mapGetters('members', { me: 'getThisMember' }),
   },
   methods: {
     toDeposit() { this.$router.push('/deposit') },
+    async fetchMe() {
+      return await this.$store
+        .dispatch('members/getThisMember')
+        .then()
+        .finally()
+    },
   },
   mounted() {
     if (!this.isLoggedIn) {
       this.$router.replace('/login')
     }
+    this.fetchMe()
   },
   beforeDestroy() {
     this.$store.commit('members/set_one_member', null)
