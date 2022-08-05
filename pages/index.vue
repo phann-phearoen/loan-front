@@ -46,25 +46,25 @@
                   <div class="label">សមាជិកសរុប</div>
                 </v-col>
                 <v-col cols="9" class="bb">
-                  <div class="label"></div>
+                  <div class="label">{{ getTotalMembers }} នាក់</div>
                 </v-col>
                 <v-col cols="3" class="bb">
                   <div class="label">ទុនសរុប</div>
                 </v-col>
                 <v-col cols="9" class="bb">
-                  <div class="label"></div>
+                  <div class="label">{{ getTotalDeposits.toLocaleString() }} ៛</div>
                 </v-col>
                 <v-col cols="3" class="bb">
                   <div class="label">កម្ចីសរុប</div>
                 </v-col>
                 <v-col cols="9" class="bb">
-                  <div class="label"></div>
+                  <div class="label">{{ getTotalLoans.toLocaleString() }} ៛</div>
                 </v-col>
                 <v-col cols="3" class="bb">
                   <div class="label">អតិថិជនសរុប</div>
                 </v-col>
                 <v-col cols="9" class="bb">
-                  <div class="label"></div>
+                  <div class="label">{{ getTotalClients }} នាក់</div>
                 </v-col>
               </v-row>
             </v-card-text>
@@ -125,6 +125,12 @@ export default {
   computed: {
     ...mapGetters('session', ['getUser', 'isLoggedIn']),
     ...mapGetters('members', { me: 'getThisMember' }),
+    ...mapGetters('users', [
+      'getTotalMembers',
+      'getTotalDeposits',
+      'getTotalLoans',
+      'getTotalClients',
+    ])
   },
   methods: {
     toDeposit() { this.$router.push('/deposit') },
@@ -140,6 +146,10 @@ export default {
       this.$router.replace('/login')
     }
     this.fetchMe()
+    this.$store.dispatch('users/getTotalMembers')
+    this.$store.dispatch('users/getTotalDeposits')
+    this.$store.dispatch('users/getTotalLoans')
+    this.$store.dispatch('users/getTotalClients')
   },
   beforeDestroy() {
     this.$store.commit('members/set_one_member', null)

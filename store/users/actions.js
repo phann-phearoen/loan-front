@@ -77,7 +77,7 @@ export default {
         .get(`${process.env.NUXT_ENV_API_URL}/api/v1/loans/get_total_loans`)
         .then((resp) => {
           const obj = resp.data
-          if (!obj) {
+          if (obj === null) {
             reject(new Error('API return value is wrong'))
           }
           resolve(resp)
@@ -86,13 +86,13 @@ export default {
         .catch((err) => {})
     })
   },
-  async getTotalMembers({ commit }) {
+  async getTotalClients({ commit }) {
     return await new Promise((resolve, reject) => {
       securedInst
         .get(`${process.env.NUXT_ENV_API_URL}/api/v1/members/get_total_clients_count`)
         .then((resp) => {
           const obj = resp.data
-          if (!obj) {
+          if (obj === null) {
             reject(new Error('API return value is wrong'))
           }
           resolve(resp)
