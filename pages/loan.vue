@@ -108,6 +108,77 @@
           </v-col>
         </v-row>
     </v-card-text>
+
+    <v-card-text v-else>
+      <v-card-title>អតិថិជនខាងក្រៅ</v-card-title>
+      <v-divider></v-divider>
+      <v-text-field
+      outlined
+      label="ឈ្មោះ"
+      >
+      </v-text-field>
+      <v-select
+      :items="gender"
+      outlined
+      label="ភេទ">
+      </v-select>
+      <v-text-field 
+      outlined
+      label="ថ្ងៃខែឆ្នាំកំណើត"
+      type="date"
+      ></v-text-field>
+      <v-text-field
+      outlined
+      label="អាស័យដ្ឋាន"
+      type="adress"
+      ></v-text-field>
+      <v-text-field
+      label="លេខទូរស័ព្ទ"
+      type="number"
+      outlined
+      ></v-text-field>
+      <v-text-field
+      outlined
+      label="ទឹកប្រាក់ដែលត្រូវខ្ចី"
+      suffix="៛"
+      type="number"
+      ></v-text-field>
+      <v-row>
+        <v-col>
+          <v-text-field
+      label="កាលបរិច្ឆេទខ្ជី"
+      outlined
+      type="date"
+      ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field
+      label="កាលបរិច្ឆេទសង"
+      outlined
+      type="date"
+      ></v-text-field>
+        </v-col>
+      </v-row>
+      
+      <v-text-field
+      label="រយៈពេលខ្ចី"
+      suffix="ខែ"
+      outlined
+      type="number"
+      ></v-text-field>
+      <v-text-field 
+      label="អត្រាការប្រាក"
+      suffix="%"
+      outlined 
+      type="number">
+      </v-text-field>
+      <v-text-field
+      label="លេខប័ណ្ណសំគាល់លំនៅដ្ឋាន"
+      outlined
+      type="number"
+      >
+      </v-text-field>
+    </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
@@ -148,13 +219,14 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      forMembers: true,
+      forMembers: false,
       memberId: null,
       amount: null,
       period: null,
       rate: 3,
       agreed: false,
       sheetCreated: false,
+      gender:['ប្រុស','ស្រី']
     }
   },
   computed: {
