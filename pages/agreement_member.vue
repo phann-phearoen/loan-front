@@ -1,5 +1,16 @@
 <template>
-  <v-card v-if="loanProvider && loanTaker && loan && pawn" width="100%" class="px-10">
+  <v-card
+    v-if="
+      loanProvider &&
+      loanTaker &&
+      loan &&
+      pawn
+    "
+    width="100%"
+    tile
+    outlined
+    class="px-10"
+  >
     <v-card-text>
       <div class="text-center title">
         ព្រះរាជាណាចករកម្ពុជា<br>
