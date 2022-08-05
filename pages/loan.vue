@@ -186,14 +186,6 @@ export default {
       this.amount = null
     },
     doCreateAgreementForMember() {
-      const loanObject = {
-        loanProvider: loanProvider,
-        loanTaker: loanTaker,
-        loan: loan,
-        pawn: pawn,
-      }
-      sessionStorage.setItem('loanObject', JSON.stringify(loanObject))
-      console.log(loanObject)
       window.open(`/agreement_member`)
     },
     doCreateRepaySheet() {

@@ -209,7 +209,7 @@ export default {
   text-indent: 2rem;
 }
 .justify-end{
-  justify-content: end;
+  justify-content: flex-end;
   display: flex;
 }
 </style>
