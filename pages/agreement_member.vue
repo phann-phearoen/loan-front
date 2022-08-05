@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="loanProvider && loanTaker && loan && pawn" width="100%">
+  <v-card v-if="loanProvider && loanTaker && loan && pawn" width="100%" class="px-10">
     <v-card-text>
       <div class="text-center title">
         ព្រះរាជាណាចករកម្ពុជា<br>
@@ -206,7 +206,7 @@ export default {
   line-height: 2;
 }
 .indent{
-  text-indent: 4rem;
+  text-indent: 2rem;
 }
 .justify-end{
   justify-content: end;
