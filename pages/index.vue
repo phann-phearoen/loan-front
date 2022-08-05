@@ -9,46 +9,66 @@
             <v-card-title>គណនីរបស់ខ្ញុំ</v-card-title>
             <v-card-text>
               <v-row class="detail-row">
-                <v-col cols="3" align-self="end">
+                <v-col cols="3" class="bb">
                   <div class="label">ឈ្មោះ</div>
                 </v-col>
-                <v-col align-self="end">
+                <v-col cols="9" class="bb">
                   <div class="label">{{ me.name }}</div>
                 </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row class="detail-row">
-                <v-col cols="3" align-self="end">
+                <v-col cols="3" class="bb">
                   <div class="label">ភេទ</div>
                 </v-col>
-                <v-col align-self="end">
+                <v-col cols="9" class="bb">
                   <div class="label">{{ me.gender }}</div>
                 </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row class="detail-row">
-                <v-col cols="3" align-self="end">
+                <v-col cols="3" class="bb">
                   <div class="label">ប្រាក់សន្សំសរុប</div>
                 </v-col>
-                <v-col align-self="end">
+                <v-col cols="9" class="bb">
                   <div class="label">{{ me.deposit ? me.deposit.toLocaleString() : 0 }} ៛</div>
                 </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-row class="detail-row">
-                <v-col cols="3" align-self="end">
+                <v-col cols="3" class="bb">
                   <div class="label">ប្រាក់កម្ចីសរុប</div>
                 </v-col>
-                <v-col align-self="end">
+                <v-col cols="9" class="bb">
                   <div class="label">{{ me.loan ? me.loan.toLocaleString() : 0 }} ៛</div>
                 </v-col>
               </v-row>
-              <v-divider></v-divider>
             </v-card-text>
           </v-card>
         </v-col>
         <v-col>
-
+          <v-card>
+            <v-card-title>ទិន្នន័យសង្ខេប</v-card-title>
+            <v-card-text>
+              <v-row>
+                <v-col cols="3" class="bb">
+                  <div class="label">សមាជិកសរុប</div>
+                </v-col>
+                <v-col cols="9" class="bb">
+                  <div class="label"></div>
+                </v-col>
+                <v-col cols="3" class="bb">
+                  <div class="label">ទុនសរុប</div>
+                </v-col>
+                <v-col cols="9" class="bb">
+                  <div class="label"></div>
+                </v-col>
+                <v-col cols="3" class="bb">
+                  <div class="label">កម្ចីសរុប</div>
+                </v-col>
+                <v-col cols="9" class="bb">
+                  <div class="label"></div>
+                </v-col>
+                <v-col cols="3" class="bb">
+                  <div class="label">អតិថិជនសរុប</div>
+                </v-col>
+                <v-col cols="9" class="bb">
+                  <div class="label"></div>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
         </v-col>
       </v-row>
     </v-card-text>
@@ -128,5 +148,7 @@ export default {
 </script>
 
 <style scoped>
-
+.bb {
+  border-bottom: 1px solid grey;
+}
 </style>
