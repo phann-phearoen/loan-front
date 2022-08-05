@@ -19,7 +19,7 @@
       </div>
       <div>
         <v-card-text class="normal">
-            ១- ភាគីអោយខ្ចីចងការៈ ឈ្មោះ {{loanProvider.name}} ភេទ {{loanProvider.gender}}​ អាយុ​{{loanProvider.age}} ឆ្នាំ 
+            ១- ភាគីអោយខ្ចីចងការៈ ឈ្មោះ {{loanProvider.name}} ភេទ {{loanProvider.gender}}​ អាយុ​ {{ calcAge(loanProvider.date_of_birth) }} ឆ្នាំ 
             មានទីលំនៅនៅ {{loanProvider.address}} ជាភាគី(ក)។
           <br>
           ២- ភាគីសុំខ្ចីចងការៈ ឈ្មោះ ​{{loanTaker.name}} ភេទស្រី {{loanTaker.gender}} អាយុ​ {{loanTaker.age}}​​ ឆ្នាំ អត្តសញ្ញាណបណ្ណលេខ
@@ -41,7 +41,7 @@
             2. ភាគី(ខ)​បានដាក់បញ្ចាំនូវអចលនៈឫ ចលនៈវត្ថុ ដែលជាកម្មសិទ្ធស្របច្បាប់ផ្ទាល់ខ្លួន ដើម្បីធានាបំណុលទាំងដើមនិងការប្រាក់ដល់ភាគី(ក)​ រួមមាន៖
             <br>
             ២-១. ដីលំនៅដ្ឋានមានប័ណ្ណសំគាល់លេខ​{{pawn.no}} ចុះថ្ងៃទី​ {{pawn.registerDate}} ដោយ{{pawn.registeredBy}}
-            ដីនេះមានទំហំ​​ {{pawn.surfaceArea}} និងមានតម្លៃប៉ាន់ស្មានចំនួន {{estimateValue}}
+            ដីនេះមានទំហំ​​ {{pawn.surfaceArea}} និងមានតម្លៃប៉ាន់ស្មានចំនួន {{pawn.estimateValue}}
             <p class="indent">
             ខាងជើងទល់នឹង​ {{pawn.north}}​ ខាងត្បូងទល់នឹង {{pawn.south}}
             </p>
@@ -189,6 +189,21 @@ export default {
   },
   computed: {
     loanProvider() { return JSON.parse(sessionStorage.getItem('loanProvider')) },
+  },
+  methods: {
+    calcAge(dateString) {
+      let today = new Date()
+      let birthDate = new Date(dateString)
+      let age = today.getFullYear() - birthDate.getFullYear()
+      let m = today.getMonth() - birthDate.getMonth()
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--
+      }
+      return age
+    }
+  },
+  mounted() {
+    console.log(this.loanProvider)
   },
 }
 </script>
