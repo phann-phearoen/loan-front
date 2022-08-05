@@ -115,33 +115,40 @@
       <v-text-field
       outlined
       label="ឈ្មោះ"
+      clearable
       >
       </v-text-field>
       <v-select
       :items="gender"
       outlined
-      label="ភេទ">
+      label="ភេទ"
+      clearable
+      >
       </v-select>
       <v-text-field 
       outlined
       label="ថ្ងៃខែឆ្នាំកំណើត"
       type="date"
+      clearable
       ></v-text-field>
       <v-text-field
       outlined
       label="អាស័យដ្ឋាន"
       type="adress"
+      clearable
       ></v-text-field>
       <v-text-field
       label="លេខទូរស័ព្ទ"
       type="number"
       outlined
+      clearable
       ></v-text-field>
       <v-text-field
       outlined
       label="ទឹកប្រាក់ដែលត្រូវខ្ចី"
       suffix="៛"
       type="number"
+      clearable
       ></v-text-field>
       <v-row>
         <v-col>
@@ -149,33 +156,130 @@
       label="កាលបរិច្ឆេទខ្ជី"
       outlined
       type="date"
+      clearable
       ></v-text-field>
         </v-col>
         <v-col>
           <v-text-field
-      label="កាលបរិច្ឆេទសង"
-      outlined
-      type="date"
+          label="កាលបរិច្ឆេទសង"
+          outlined
+          type="date"
+          clearable
       ></v-text-field>
         </v-col>
       </v-row>
-      
-      <v-text-field
-      label="រយៈពេលខ្ចី"
-      suffix="ខែ"
-      outlined
-      type="number"
+
+      <v-row>
+        <v-col>
+          <v-text-field
+            label="រយៈពេលខ្ចី"
+            suffix="ខែ"
+            outlined
+            type="number"
+            clearable
       ></v-text-field>
-      <v-text-field 
-      label="អត្រាការប្រាក"
-      suffix="%"
-      outlined 
-      type="number">
+        </v-col>
+        <v-col>
+          <v-text-field 
+            label="អត្រាការប្រាក់"
+            suffix="%"
+            outlined 
+            type="number"
+            clearable
+            >
       </v-text-field>
-      <v-text-field
+        </v-col>
+      </v-row>      
+      
+      <v-row>
+        <v-col>
+          <v-text-field
       label="លេខប័ណ្ណសំគាល់លំនៅដ្ឋាន"
       outlined
       type="number"
+      clearable
+      >
+      </v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field
+      label="កាលបរិច្ឆេទចុះបញ្ជី"
+      outlined
+      type="date"
+      readonly
+      clearable
+      >
+      </v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-text-field
+          label="ទំហំដី"
+          outlined
+          type="number"
+          suffix="ម៉ែត្រការេ"
+          clearable
+          ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field
+          label="តម្លៃដីប៉ាន់ស្មាន"
+          outlined
+          suffix="៛"
+          type="number"
+          clearable
+          >
+          </v-text-field>
+        </v-col>
+      </v-row>
+      <v-row >
+        <v-col
+          cols="12"
+          sm="6"
+          
+        >
+          <v-text-field
+            label="ព្រំប្រទល់ខាងជើង"
+            clearable
+            px-6
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <v-text-field
+            label="ព្រំប្រទល់ខាងត្បូង"
+            clearable
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <v-text-field
+            label="ព្រំប្រទល់ខាងលិច"
+            clearable
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <v-text-field
+            label="ព្រំប្រទល់ខាងកើត"
+            clearable
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-text-field 
+      label="ទ្រព្យសម្បត្តិដទៃទៀត"
+      clearable
+      type="text"
       >
       </v-text-field>
     </v-card-text>
