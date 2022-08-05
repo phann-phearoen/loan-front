@@ -153,13 +153,6 @@ export default {
   layout: 'agreement',
   data() {
     return {
-      loanProvider: {
-        name: 'hid',
-        gender: 'hdso',
-        age: '40',
-        address: 'abcddfg',
-        national_id: '1222112221',
-      },
       loanTaker: {
         name: 'abcd',
         gender: 'ប្រុស',
@@ -173,7 +166,6 @@ export default {
         from: '14',
         to: '67dds',
         rate: 'djfd'
-
       },
       pawn: {
         no:'1111',
@@ -189,8 +181,8 @@ export default {
       },
     }
   },
-  mounted() {
-    console.log(this.loanObject)
+  computed: {
+    loanProvider() { return JSON.parse(sessionStorage.getItem('loanProvider')) },
   },
 }
 </script>
