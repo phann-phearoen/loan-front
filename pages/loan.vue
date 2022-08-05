@@ -116,10 +116,12 @@
       outlined
       label="ឈ្មោះ"
       clearable
+      v-model="loanTaker.name"
       >
       </v-text-field>
       <v-select
-      :items="gender"
+      v-model="loanTaker.gender"
+      :items="loanTaker.gender"
       outlined
       label="ភេទ"
       clearable
@@ -130,12 +132,14 @@
       label="ថ្ងៃខែឆ្នាំកំណើត"
       type="date"
       clearable
+      v-model="loanTaker.birthDate"
       ></v-text-field>
       <v-text-field
       outlined
       label="អាស័យដ្ឋាន"
       type="adress"
       clearable
+      v-model="loanTaker.address"
       ></v-text-field>
       <v-text-field
       label="លេខទូរស័ព្ទ"
@@ -329,8 +333,16 @@ export default {
       period: null,
       rate: 3,
       agreed: false,
-      sheetCreated: false,
-      gender:['ប្រុស','ស្រី']
+      sheetCreated: false,     
+      loanTaker:{
+        name:'',
+        gender:['ប្រុស','ស្រី'],
+        birthDate: null,
+        address: null,
+        loanDate: null,
+        repayDate: null,
+        
+      }
     }
   },
   computed: {
