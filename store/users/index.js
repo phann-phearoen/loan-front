@@ -4,6 +4,10 @@ import mutations from './mutations'
 
 export const state = () => ({
   allUsers: [],
+  totalMembers: null,
+  totalDeposits: null,
+  totalLoan: null,
+  totalClients: null,
 })
 
 export default {

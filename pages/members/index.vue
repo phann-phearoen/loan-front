@@ -27,10 +27,10 @@
           @click:row="doGoToTheMember"
         >
           <template #[`item.deposit`]="{ item }">
-            <div>{{ item.deposit ? item.deposit : 0 }}៛</div>
+            <div>{{ item.deposit > 0 ? item.deposit.toLocaleString() : 0 }}៛</div>
           </template>
           <template #[`item.loan`]="{ item }">
-            <div>{{ item.loan ? item.loan : 0 }}៛</div>
+            <div>{{ item.loan > 0 ? item.loan.toLocaleString() : 0 }}៛</div>
           </template>
         </v-data-table>
       </v-card-text>
@@ -101,6 +101,7 @@ export default {
         .then((res) => {
           this.pagination.totalCount = res.data.total_count
           this.pagination.totalPages = res.data.total_pages
+          console.log(typeof res.data.members[0].deposit)
         })
         .catch()
         .finally(() => this.isLoading = false)
