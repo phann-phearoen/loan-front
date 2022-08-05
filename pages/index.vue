@@ -49,7 +49,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ me.deposit ? me.deposit : 0 }} ៛
+          {{ me.deposit ? me.deposit.toLocaleString() : 0 }} ៛
         </v-col>
       </v-row>
       <v-divider></v-divider>
@@ -65,7 +65,7 @@
           align-self="end"
           class="text-h6"
         >
-          {{ me.loan ? me.loan : 0 }} ៛
+          {{ me.loan ? me.loan.toLocaleString() : 0 }} ៛
         </v-col>
       </v-row>
       <v-divider></v-divider>
