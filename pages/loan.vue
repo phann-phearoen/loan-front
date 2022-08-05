@@ -188,6 +188,7 @@ export default {
     },
     doCreateAgreementForMember() {
       sessionStorage.setItem('loanProvider', JSON.stringify(this.getThisMember))
+      sessionStorage.setItem('loanTaker', JSON.stringify(this.getMemberToLoan))
       window.open(`/agreement_member`)
     },
     doCreateRepaySheet() {
