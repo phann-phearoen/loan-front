@@ -22,7 +22,7 @@
             ១- ភាគីអោយខ្ចីចងការៈ ឈ្មោះ {{loanProvider.name}} ភេទ {{loanProvider.gender}}​ អាយុ​ {{ calcAge(loanProvider.date_of_birth) }} ឆ្នាំ 
             មានទីលំនៅនៅ {{loanProvider.address}} ជាភាគី(ក)។
           <br>
-          ២- ភាគីសុំខ្ចីចងការៈ ឈ្មោះ ​{{loanTaker.name}} ភេទស្រី {{loanTaker.gender}} អាយុ​ {{loanTaker.age}}​​ ឆ្នាំ អត្តសញ្ញាណបណ្ណលេខ
+          ២- ភាគីសុំខ្ចីចងការៈ ឈ្មោះ ​{{loanTaker.name}} ភេទស្រី {{loanTaker.gender}} អាយុ​ {{ calcAge(loanTaker.date_of_birth) }}​​ ឆ្នាំ អត្តសញ្ញាណបណ្ណលេខ
            {{loanTaker.national_id}}​​ មានទីលំនៅនៅ {{loanTaker.address}} ជាភាគី(ខ)។
           <p class="indent">
           1. ភាគ(ក)យល់ព្រមឲ្យភាគី(ខ)​ខ្ចីចងការ ហើយបើភាគី(ខ) បានព្រមទទួល និងសន្យាសងមក ភាគី(ក)​​ ជាដាច់ខាត នូវ
@@ -159,13 +159,6 @@ export default {
   layout: 'agreement',
   data() {
     return {
-      loanTaker: {
-        name: 'abcd',
-        gender: 'ប្រុស',
-        age: '90',
-        address: 'sdjkdkldfdfdn',
-        national_id: '12233444554'
-      },
       loan: {
         amount: '23',
         period: '45',
@@ -189,6 +182,7 @@ export default {
   },
   computed: {
     loanProvider() { return JSON.parse(sessionStorage.getItem('loanProvider')) },
+    loanTaker() { return JSON.parse(sessionStorage.getItem('loanTaker')) },
   },
   methods: {
     calcAge(dateString) {
@@ -204,6 +198,7 @@ export default {
   },
   mounted() {
     console.log(this.loanProvider)
+    console.log(this.loanTaker)
   },
 }
 </script>
