@@ -140,3 +140,10 @@ export default {
   },
 }
 </script>
+
+<style>
+.label {
+  font-size: 1.25em;
+  padding: 15px 0;
+}
+</style>
