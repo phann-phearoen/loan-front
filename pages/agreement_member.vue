@@ -14,9 +14,9 @@
   >
     <v-card-text>
       <div class="text-center title">
-        ព្រះរាជាណាចករកម្ពុជា<br>
-        ជាតិ សាសនា ព្រះមហាក្សត្រ<br><br>
-       <u>កិច្ចសន្យាខ្ចីចងការប្រាក់ និងដាក់បញ្ចាំ</u> 
+        ព្រះរាជាណាចករកម្ពុជា<br />
+        ជាតិ សាសនា ព្រះមហាក្សត្រ<br /><br />
+        <u>កិច្ចសន្យាខ្ចីចងការប្រាក់ និងដាក់បញ្ចាំ</u>
       </div>
       <div>
         <v-card-text class="normal">
@@ -81,36 +81,32 @@
           <div class="justify-end">ធ្វើនៅ...................ថ្ងៃទី......ខែ..............ឆ្នាំ.......................</div>
         </v-card-text>
       </div>
-      <v-row
-        justify="center"
-        class="mt-12"
-        style="min-height: 200px"
-      >
+      <v-row justify="center" class="mt-12" style="min-height: 200px">
         <v-col>
           <div class="text-center normal">
             ភាគីសុំខ្ចីចងការ​ ភាគី(ខ)
-            <br>
+            <br />
             ស្នាមមេដៃស្តាំ
           </div>
         </v-col>
         <v-col>
           <div class="text-center normal">
             អ្នកធានា
-            <br>
+            <br />
             ស្នាមមេដាំស្តាំ
           </div>
         </v-col>
         <v-col>
           <div class="text-center normal">
             ភាគីឲ្យចងការ ភាគី(ក)
-            <br>
+            <br />
             ស្នាមមេដៃស្តាំ
           </div>
         </v-col>
         <v-col>
           <div class="text-center normal">
             សាក្សី
-            <br>
+            <br />
             ស្នាមមេដៃស្តាំ
           </div>
         </v-col>
@@ -158,22 +154,22 @@
 
 <script>
 export default {
-  layout: 'agreement',
+  layout: "agreement",
   data() {
     return {
       pawn: {
-        no:'1111',
-        registerDate: '',
-        registeredBy: '',
-        surfaceArea: '',
-        estimateValue: '',
-        north: '',
-        south: '',
-        east: '',
-        west: '',
-        otherAsset: ''
+        no: "1111",
+        registerDate: "",
+        registeredBy: "",
+        surfaceArea: "",
+        estimateValue: "",
+        north: "",
+        south: "",
+        east: "",
+        west: "",
+        otherAsset: "",
       },
-    }
+    };
   },
   computed: {
     loanProvider() { return JSON.parse(sessionStorage.getItem('loanProvider')) },
@@ -197,7 +193,7 @@ export default {
     console.log(this.loanTaker)
     console.log(this.loan)
   },
-}
+};
 </script>
 
 <style scoped>
@@ -209,10 +205,10 @@ export default {
   font-size: 1.25em !important;
   line-height: 2;
 }
-.indent{
+.indent {
   text-indent: 2rem;
 }
-.justify-end{
+.justify-end {
   justify-content: flex-end;
   display: flex;
 }
