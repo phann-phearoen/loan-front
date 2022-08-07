@@ -354,7 +354,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("members", ["getOneMember", "getMemberToLoan"]),
+    ...mapGetters('members', [
+      'getOneMember',
+      'getMemberToLoan',
+      'getThisMember',
+    ]),
   },
   methods: {
     async doFindMember() {
@@ -379,7 +383,20 @@ export default {
       this.amount = null;
     },
     doCreateAgreementForMember() {
-      window.open(`/agreement_member`);
+      sessionStorage.setItem('loanProvider', JSON.stringify(this.getThisMember))
+      sessionStorage.setItem('loanTaker', JSON.stringify(this.getMemberToLoan))
+      let now = new Date()
+      const loan = {
+        amount: parseInt(this.amount).toLocaleString(),
+        period: this.period,
+        rate: this.rate,
+        from: now.toISOString().slice(0, 10),
+        to: 
+          new Date(now.setMonth(now.getMonth() + parseInt(this.period)))
+          .toISOString().slice(0, 10),
+      }
+      sessionStorage.setItem('loan', JSON.stringify(loan))
+      window.open(`/agreement_member`)
     },
     doCreateRepaySheet() {
       this.sheetCreated = true;
@@ -393,7 +410,12 @@ export default {
     },
     submit() {},
   },
-};
+  mounted() {
+    if (!this.getThisMember) {
+      this.$store.dispatch('members/getThisMember')
+    }
+  },
+}
 </script>
 
 <style scoped>
