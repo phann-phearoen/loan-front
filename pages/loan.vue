@@ -149,6 +149,7 @@
       ></v-text-field>
       <v-text-field
       outlined
+      v-model="loanTaker.loanAmount"
       label="ទឹកប្រាក់ដែលត្រូវខ្ចី"
       suffix="៛"
       type="number"
@@ -158,6 +159,7 @@
         <v-col>
           <v-text-field
       label="កាលបរិច្ឆេទខ្ជី"
+      v-model="loanTaker.loanDate"
       outlined
       type="date"
       clearable
@@ -169,6 +171,7 @@
           outlined
           type="date"
           clearable
+          v-model="loanTaker.loanDate"
       ></v-text-field>
         </v-col>
       </v-row>
@@ -181,6 +184,7 @@
             outlined
             type="number"
             clearable
+            v-model="loanTaker.loanPeriod"
       ></v-text-field>
         </v-col>
         <v-col>
@@ -190,6 +194,7 @@
             outlined 
             type="number"
             clearable
+            v-model="loanTaker.rate"
             >
       </v-text-field>
         </v-col>
@@ -202,6 +207,7 @@
       outlined
       type="number"
       clearable
+      v-model="loanTaker.landRegisteredNumber"
       >
       </v-text-field>
         </v-col>
@@ -212,6 +218,7 @@
       type="date"
       readonly
       clearable
+      v-model="loanTaker.landRegisteredDate"
       >
       </v-text-field>
         </v-col>
@@ -224,6 +231,7 @@
           type="number"
           suffix="ម៉ែត្រការេ"
           clearable
+          v-model="loanTaker.suface"
           ></v-text-field>
         </v-col>
         <v-col>
@@ -233,6 +241,7 @@
           suffix="៛"
           type="number"
           clearable
+          v-model="loanTaker.landEstimatedValue"
           >
           </v-text-field>
         </v-col>
@@ -247,6 +256,7 @@
             label="ព្រំប្រទល់ខាងជើង"
             clearable
             px-6
+            v-model="loanTaker.landBorder.north"
           ></v-text-field>
         </v-col>
 
@@ -257,6 +267,7 @@
           <v-text-field
             label="ព្រំប្រទល់ខាងត្បូង"
             clearable
+            v-model="loanTaker.landBorder.south"
           ></v-text-field>
         </v-col>
 
@@ -267,6 +278,7 @@
           <v-text-field
             label="ព្រំប្រទល់ខាងលិច"
             clearable
+            v-model="loanTaker.landBorder.west"
           ></v-text-field>
         </v-col>
 
@@ -277,12 +289,14 @@
           <v-text-field
             label="ព្រំប្រទល់ខាងកើត"
             clearable
+            v-model="loanTaker.landBorder.east"
           ></v-text-field>
         </v-col>
       </v-row>
       <v-text-field 
       label="ទ្រព្យសម្បត្តិដទៃទៀត"
       clearable
+      v-model="loanTaker.otherAssets"
       type="text"
       >
       </v-text-field>
@@ -339,9 +353,21 @@ export default {
         gender:['ប្រុស','ស្រី'],
         birthDate: null,
         address: null,
+        loanAmount: '',
         loanDate: null,
         repayDate: null,
-        
+        loanPeriod: null,
+        landRegisteredNumber: null,
+        landRegisteredDate: null,
+        landSurface: '',
+        landEstimatedValue: '',
+        landBorder: {
+          north: '',
+          south: '',
+          west: '',
+          east: ''
+        },
+        otherAssets: ''
       }
     }
   },
