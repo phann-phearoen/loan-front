@@ -189,6 +189,17 @@ export default {
     doCreateAgreementForMember() {
       sessionStorage.setItem('loanProvider', JSON.stringify(this.getThisMember))
       sessionStorage.setItem('loanTaker', JSON.stringify(this.getMemberToLoan))
+      let now = new Date()
+      const loan = {
+        amount: parseInt(this.amount).toLocaleString(),
+        period: this.period,
+        rate: this.rate,
+        from: now.toISOString().slice(0, 10),
+        to: 
+          new Date(now.setMonth(now.getMonth() + parseInt(this.period)))
+          .toISOString().slice(0, 10),
+      }
+      sessionStorage.setItem('loan', JSON.stringify(loan))
       window.open(`/agreement_member`)
     },
     doCreateRepaySheet() {

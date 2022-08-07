@@ -27,9 +27,9 @@
           <p class="indent">
           1. ភាគ(ក)យល់ព្រមឲ្យភាគី(ខ)​ខ្ចីចងការ ហើយបើភាគី(ខ) បានព្រមទទួល និងសន្យាសងមក ភាគី(ក)​​ ជាដាច់ខាត នូវ
         ប្រាក់ខ្ចីចងការនះតាមចំនួន និងរាល់លក្ខខ័ណ្ឌដែលបានព្រមព្រៀងគ្នាដូចតទៅ​៖ <br>
-            ១-១. ប្រាក់ខ្ចីចងការដែល ភាគី(ខ)បានទទួលពីភាគី(ក)​មានចំនួនជាលេខ​ {{loan.amount}} ប្រាក់សរសេរជាអក្សរ.....................
+            ១-១. ប្រាក់ខ្ចីចងការដែល ភាគី(ខ)បានទទួលពីភាគី(ក)​មានចំនួនជាលេខ​ {{loan.amount}} ៛ ប្រាក់សរសេរជាអក្សរ.....................
             <br>
-            ១-២. រយៈពេលខ្ចីចងការចំនួន​ {{loan.period}} ខែ គិតចាប់ពី{{loan.from}} រហូតដល់​{{loan.to}}
+            ១-២. រយៈពេលខ្ចីចងការចំនួន​ {{loan.period}} ខែ គិតចាប់ពី {{loan.from}} រហូតដល់ ​{{loan.to}}
             <br>
             ១-៣. អត្រាការប្រាក់​{{loan.rate}}ភាគរយក្នុងមួយខែ
             <br>
@@ -159,13 +159,6 @@ export default {
   layout: 'agreement',
   data() {
     return {
-      loan: {
-        amount: '23',
-        period: '45',
-        from: '14',
-        to: '67dds',
-        rate: 'djfd'
-      },
       pawn: {
         no:'1111',
         registerDate: '',
@@ -183,6 +176,7 @@ export default {
   computed: {
     loanProvider() { return JSON.parse(sessionStorage.getItem('loanProvider')) },
     loanTaker() { return JSON.parse(sessionStorage.getItem('loanTaker')) },
+    loan() { return JSON.parse(sessionStorage.getItem('loan')) },
   },
   methods: {
     calcAge(dateString) {
@@ -199,6 +193,7 @@ export default {
   mounted() {
     console.log(this.loanProvider)
     console.log(this.loanTaker)
+    console.log(this.loan)
   },
 }
 </script>
