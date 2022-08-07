@@ -4,6 +4,7 @@
       គណណីរបស់ {{ oneMember.name }}
     </v-card-title>
     <v-divider></v-divider>
+    
     <v-card-text class="px-16">
       <v-row class="detail-row">
         <v-col
@@ -87,6 +88,7 @@
       </v-btn>
     </v-card-actions>
   </v-card>
+  
 </template>
 
 <script>

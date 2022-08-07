@@ -110,7 +110,6 @@
       <v-text-field outlined label="ឈ្មោះ" clearable v-model="loanTaker.name">
       </v-text-field>
       <v-select
-        v-model="loanTaker.gender"
         :items="loanTaker.gender"
         outlined
         label="ភេទ"
