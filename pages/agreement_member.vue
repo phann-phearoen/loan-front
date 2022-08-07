@@ -1,5 +1,16 @@
 <template>
-  <v-card v-if="loanProvider && loanTaker && loan && pawn" width="100%" class="px-10">
+  <v-card
+    v-if="
+      loanProvider &&
+      loanTaker &&
+      loan &&
+      pawn
+    "
+    width="100%"
+    tile
+    outlined
+    class="px-10"
+  >
     <v-card-text>
       <div class="text-center title">
         ព្រះរាជាណាចករកម្ពុជា<br>
@@ -102,23 +113,22 @@
       </v-row>
 
       <v-row>
-      <v-col>
-        <v-card-text
-          class="pa-2"
-          tile
-        >
-          លេខ.............................................................
-          <br>
-          បានឃើញនិងបញ្ជាក់ថាៈ សេចក្តីបញ្ជាក់របស់​លោកមេភូមិ​.....................
-          ខាងលើនេះពិតជាត្រឹមត្រូវប្រាកដមែន។
-          <br>
-          ថ្ងៃទី...........................ខែ...............ឆ្នាំ...............
-          <br>
-          មេឃុំ.............................................................
-          <div style="justify-content:center">
-            <p>
-               ហត្ថលេខា​ និងត្រា
-            </p>
+        <v-col>
+          <div
+            class="pa-2"
+            tile
+          >
+            លេខ.............................................................
+            <br>
+            បានឃើញនិងបញ្ជាក់ថាៈ សេចក្តីបញ្ជាក់របស់​លោកមេភូមិ​.....................
+            ខាងលើនេះពិតជាត្រឹមត្រូវប្រាកដមែន។
+            <br>
+            ថ្ងៃទី...........................ខែ...............ឆ្នាំ...............
+            <br>
+            មេឃុំ.............................................................
+            <div class="text-center">
+              ហត្ថលេខា​ និងត្រា
+            </div>
           </div>
         </v-card-text>
       </v-col>
@@ -142,7 +152,6 @@
         </v-card-text>
       </v-col>
     </v-row>
-
     </v-card-text>
   </v-card>
 </template>
@@ -152,13 +161,6 @@ export default {
   layout: 'agreement',
   data() {
     return {
-      loanProvider: {
-        name: 'hid',
-        gender: 'hdso',
-        age: '40',
-        address: 'abcddfg',
-        national_id: '1222112221',
-      },
       loanTaker: {
         name: 'abcd',
         gender: 'ប្រុស',
@@ -172,7 +174,6 @@ export default {
         from: '14',
         to: '67dds',
         rate: 'djfd'
-
       },
       pawn: {
         no:'1111',
@@ -188,8 +189,8 @@ export default {
       },
     }
   },
-  mounted() {
-    console.log(this.loanObject)
+  computed: {
+    loanProvider() { return JSON.parse(sessionStorage.getItem('loanProvider')) },
   },
 }
 </script>
@@ -207,7 +208,7 @@ export default {
   text-indent: 2rem;
 }
 .justify-end{
-  justify-content: end;
+  justify-content: flex-end;
   display: flex;
 }
 </style>

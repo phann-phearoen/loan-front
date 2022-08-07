@@ -160,7 +160,8 @@ export default {
   computed: {
     ...mapGetters('members', [
       'getOneMember',
-      'getMemberToLoan'
+      'getMemberToLoan',
+      'getThisMember',
     ]),
   },
   methods: {
@@ -186,14 +187,7 @@ export default {
       this.amount = null
     },
     doCreateAgreementForMember() {
-      const loanObject = {
-        loanProvider: loanProvider,
-        loanTaker: loanTaker,
-        loan: loan,
-        pawn: pawn,
-      }
-      sessionStorage.setItem('loanObject', JSON.stringify(loanObject))
-      console.log(loanObject)
+      sessionStorage.setItem('loanProvider', JSON.stringify(this.getThisMember))
       window.open(`/agreement_member`)
     },
     doCreateRepaySheet() {
@@ -209,6 +203,11 @@ export default {
     submit() {
 
     },
+  },
+  mounted() {
+    if (!this.getThisMember) {
+      this.$store.dispatch('members/getThisMember')
+    }
   },
 }
 </script>
