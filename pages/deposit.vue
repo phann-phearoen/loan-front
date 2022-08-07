@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card width="100%">
+    <v-card width="100%" min-height="700">
       <v-card-title>ដាក់ប្រាក់សន្សំ</v-card-title>
       <v-divider></v-divider>
       <v-card-text>

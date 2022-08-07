@@ -122,4 +122,22 @@ export default {
         .catch((err) => {})
     })
   },
+  async apiNewLoan({ state, dispatch, commit }, payload) {
+    return await new Promise((resolve, reject) => {
+      securedInst
+        .post(`/api/v1/deposits/new_deposit`, {
+          id: payload.id,
+          amount: payload.amount,
+        })
+        .then((resp) => {
+          const obj = resp.data
+          console.log(resp)
+          if (!obj) {
+            reject(new Error('API return value is wrong'))
+          }
+          resolve(resp)
+        })
+        .catch((err) => {})
+    })
+  },
 }

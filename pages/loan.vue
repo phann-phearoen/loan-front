@@ -1,5 +1,5 @@
 <template>
-  <v-card width="100%">
+  <v-card width="100%" min-height="700">
     <v-card-title>ផ្ដល់ប្រាក់កម្ចី</v-card-title>
     <v-divider></v-divider>
     <v-card-actions>
@@ -79,7 +79,7 @@
           </v-col>
         </v-row>
         <v-row v-if="getMemberToLoan">
-          <v-col>
+          <v-col cols="12">
             <v-text-field
               label="បញ្ចូលចំនួនទឹកប្រាក់"
               hint="លេខរ៉ូម៉ាំង"
@@ -89,7 +89,7 @@
               :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
             ></v-text-field>
           </v-col>
-          <v-col>
+          <v-col cols="12">
             <v-text-field
               label="បញ្ចូលរយពេលជាខែ"
               type="number"
@@ -98,11 +98,20 @@
               :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
             ></v-text-field>
           </v-col>
+          <v-col cols="12">
+            <v-text-field
+              label="អត្រាការប្រាក់"
+              suffix="%"
+              v-model="rate"
+              :rules="[v => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
+            ></v-text-field>
+          </v-col>
         </v-row>
     </v-card-text>
-    <v-card-actions v-if="getMemberToLoan && amount && period">
+    <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
+        :disabled="!getMemberToLoan || !amount || !period"
         color="primary"
         min-width="200"
         @click="doCreateAgreementForMember"
@@ -110,10 +119,24 @@
         បង្កើតកិច្ចសន្យា
       </v-btn>
       <v-btn
+        :disabled="!getMemberToLoan || !amount || !period"
         color="primary"
         min-width="200"
+        @click="doCreateRepaySheet"
       >
         បង្កើតតារាងសងប្រាក់
+      </v-btn>
+      <v-spacer></v-spacer>
+    </v-card-actions>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn
+        :disabled="!agreed || !sheetCreated"
+        color="primary"
+        min-width="200"
+        @click="submit"
+      >
+        រក្សារទុក
       </v-btn>
       <v-spacer></v-spacer>
     </v-card-actions>
@@ -129,6 +152,9 @@ export default {
       memberId: null,
       amount: null,
       period: null,
+      rate: 3,
+      agreed: false,
+      sheetCreated: false,
     }
   },
   computed: {
@@ -160,7 +186,6 @@ export default {
       this.amount = null
     },
     doCreateAgreementForMember() {
-      
       const loanObject = {
         loanProvider: loanProvider,
         loanTaker: loanTaker,
@@ -170,6 +195,19 @@ export default {
       sessionStorage.setItem('loanObject', JSON.stringify(loanObject))
       console.log(loanObject)
       window.open(`/agreement_member`)
+    },
+    doCreateRepaySheet() {
+      this.sheetCreated = true
+      const obj = {
+        amount: this.amount,
+        period: this.period,
+        rate: this.rate / 100,
+      }
+      sessionStorage.setItem('loanObject', JSON.stringify(obj))
+      window.open('/repay_sheet')
+    },
+    submit() {
+
     },
   },
 }
