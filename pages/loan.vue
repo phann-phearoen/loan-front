@@ -80,7 +80,7 @@
             hint="លេខរ៉ូម៉ាំង"
             type="number"
             suffix="៛"
-            v-model="amount"
+            v-model="loan.amount"
             :rules="[(v) => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
           ></v-text-field>
         </v-col>
@@ -89,7 +89,7 @@
             label="បញ្ចូលរយពេលជាខែ"
             type="number"
             suffix="ខែ"
-            v-model="period"
+            v-model="loan.period"
             :rules="[(v) => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
           ></v-text-field>
         </v-col>
@@ -97,7 +97,7 @@
           <v-text-field
             label="អត្រាការប្រាក់"
             suffix="%"
-            v-model="rate"
+            v-model="loan.rate"
             :rules="[(v) => !!v || 'សូមបញ្ចូលលេខឲ្យបានត្រឹមត្រូវ។']"
           ></v-text-field>
         </v-col>
@@ -281,7 +281,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="!getMemberToLoan || !amount || !period"
+        :disabled="!getMemberToLoan || !loan.amount || !loan.period"
         color="primary"
         min-width="200"
         @click="doCreateAgreementForMember"
@@ -289,7 +289,7 @@
         បង្កើតកិច្ចសន្យា
       </v-btn>
       <v-btn
-        :disabled="!getMemberToLoan || !amount || !period"
+        :disabled="!getMemberToLoan || !loan.amount || !loan.period"
         color="primary"
         min-width="200"
         @click="doCreateRepaySheet"
@@ -318,11 +318,8 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      forMembers: false,
+      forMembers: true,
       memberId: null,
-      amount: null,
-      period: null,
-      rate: 3,
       agreed: false,
       sheetCreated: false,
       loanTaker: {
@@ -337,7 +334,7 @@ export default {
         period: null,
         from: "",
         to: "",
-        rate: null,
+        rate: 3,
       },
       pawn: {
         no: null,
@@ -387,12 +384,12 @@ export default {
       sessionStorage.setItem('loanTaker', JSON.stringify(this.getMemberToLoan))
       let now = new Date()
       const loan = {
-        amount: parseInt(this.amount).toLocaleString(),
-        period: this.period,
-        rate: this.rate,
+        amount: parseInt(this.loan.amount).toLocaleString(),
+        period: this.loan.period,
+        rate: this.loan.rate,
         from: now.toISOString().slice(0, 10),
         to: 
-          new Date(now.setMonth(now.getMonth() + parseInt(this.period)))
+          new Date(now.setMonth(now.getMonth() + parseInt(this.loan.period)))
           .toISOString().slice(0, 10),
       }
       sessionStorage.setItem('loan', JSON.stringify(loan))
@@ -401,9 +398,9 @@ export default {
     doCreateRepaySheet() {
       this.sheetCreated = true;
       const obj = {
-        amount: this.amount,
-        period: this.period,
-        rate: this.rate / 100,
+        amount: this.loan.amount,
+        period: this.loan.period,
+        rate: this.loan.rate / 100,
       };
       sessionStorage.setItem("loanObject", JSON.stringify(obj));
       window.open("/repay_sheet");
