@@ -393,6 +393,7 @@ export default {
           .toISOString().slice(0, 10),
       }
       sessionStorage.setItem('loan', JSON.stringify(loan))
+      sessionStorage.setItem('pawn', JSON.stringify(this.pawn))
       window.open(`/agreement_member`)
     },
     doCreateRepaySheet() {
