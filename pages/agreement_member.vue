@@ -9,7 +9,8 @@
     width="100%"
     tile
     outlined
-    class="px-10"
+    class="px-10 pt-8"
+    style="padding-bottom: 10em"
   >
     <v-card-text>
       <div class="text-center title">
@@ -19,11 +20,12 @@
       </div>
       <div>
         <v-card-text class="normal">
-            ១- ភាគីអោយខ្ចីចងការៈ ឈ្មោះ {{loanProvider.name ? loanProvider.name : '.................'}} ភេទ {{loanProvider.gender ? loanProvider.gender: '....................'}}​ អាយុ​{{loanProvider.age ? loanProvider.name : '.................................'}} ឆ្នាំ 
-            មានទីលំនៅនៅ {{loanProvider.address ? loanProvider.address : '......................................'}} ជាភាគី(ក)។
+            ១- ភាគីអោយខ្ចីចងការៈ ឈ្មោះ {{loanProvider.name ? loanProvider.name : '.................'}} 
+            ភេទ {{loanProvider.gender ? loanProvider.gender: '....................'}}​ អាយុ​ {{loanProvider.date_of_birth ? calcAge(loanProvider.date_of_birth) : '............'}} ឆ្នាំ 
+            មានទីលំនៅនៅ {{loanProvider.address ? loanProvider.address : '......................................................................'}} ជាភាគី(ក)។
           <br>
-          ២- ភាគីសុំខ្ចីចងការៈ ឈ្មោះ ​{{loanTaker.name ? loanTaker.name : '.................'}} ភេទ {{loanTaker.gender ? loanTaker.gender : '..............'}} អាយុ​ {{loanTaker.age ? loanTaker.age : '..............'}}​​ ឆ្នាំ អត្តសញ្ញាណបណ្ណលេខ
-           {{loanTaker.national_id ? loanTaker.national_id : '................................'}}​​ មានទីលំនៅនៅ {{loanTaker.address ? loanTaker.address : '..............................'}} ជាភាគី(ខ)។
+          ២- ភាគីសុំខ្ចីចងការៈ ឈ្មោះ ​{{loanTaker.name ? loanTaker.name : '.................'}} ភេទ {{loanTaker.gender ? loanTaker.gender : '..............'}} អាយុ​ {{ loanTaker.date_of_birth ? calcAge(loanTaker.date_of_birth) : '........'}}​​ ឆ្នាំ អត្តសញ្ញាណបណ្ណលេខ
+           {{loanTaker.national_id ? loanTaker.national_id : '................................'}}​​ មានទីលំនៅនៅ {{loanTaker.address ? loanTaker.address : '..............................................................'}} ជាភាគី(ខ)។
           <p class="indent">
           1. ភាគ(ក)យល់ព្រមឲ្យភាគី(ខ)​ខ្ចីចងការ ហើយបើភាគី(ខ) បានព្រមទទួល និងសន្យាសងមក ភាគី(ក)​​ ជាដាច់ខាត នូវ
         ប្រាក់ខ្ចីចងការនះតាមចំនួន និងរាល់លក្ខខ័ណ្ឌដែលបានព្រមព្រៀងគ្នាដូចតទៅ​៖ <br>
