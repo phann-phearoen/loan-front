@@ -155,26 +155,11 @@
 <script>
 export default {
   layout: "agreement",
-  data() {
-    return {
-      pawn: {
-        no: "1111",
-        registerDate: "",
-        registeredBy: "",
-        surfaceArea: "",
-        estimateValue: "",
-        north: "",
-        south: "",
-        east: "",
-        west: "",
-        otherAsset: "",
-      },
-    };
-  },
   computed: {
     loanProvider() { return JSON.parse(sessionStorage.getItem('loanProvider')) },
     loanTaker() { return JSON.parse(sessionStorage.getItem('loanTaker')) },
     loan() { return JSON.parse(sessionStorage.getItem('loan')) },
+    pawn() { return JSON.parse(sessionStorage.getItem('pawn'))}
   },
   methods: {
     calcAge(dateString) {
@@ -192,6 +177,7 @@ export default {
     console.log(this.loanProvider)
     console.log(this.loanTaker)
     console.log(this.loan)
+    console.log(this.pawn)
   },
 };
 </script>
