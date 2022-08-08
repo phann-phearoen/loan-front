@@ -370,6 +370,7 @@ export default {
       this.amount = null;
     },
     doCreateAgreementForMember() {
+      this.agreed = true
       sessionStorage.setItem('loanProvider', JSON.stringify(this.getThisMember))
       sessionStorage.setItem('loanTaker', JSON.stringify(this.getMemberToLoan))
       let now = new Date()
