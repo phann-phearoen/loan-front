@@ -1,8 +1,7 @@
 <template>
-  <div>
     <v-card width="100%" v-if="oneMember">
       <v-card-title class="justify-center text-h5">
-        គណណីរបស់ {{ oneMember.name }}
+      {{ oneMember.name }}
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text class="px-16">
@@ -39,14 +38,15 @@
         </v-row>
         <v-divider></v-divider>
       </v-card-text>
+
       <v-card-actions>
-        <v-btn x-large color="primary" @click="toDeposit">
-          ដាក់ប្រាក់សន្សំ
-        </v-btn>
-        <v-btn x-large color="primary" @click="toRepay"> សងប្រាក់ </v-btn>
+          <v-btn x-large color="primary" @click="toDeposit">
+            ដាក់ប្រាក់សន្សំ
+          </v-btn>
+          <v-btn x-large color="primary" @click="toRepay"> សងប្រាក់ </v-btn>
       </v-card-actions>
+      
     </v-card>
-  </div>
 </template>
 
 <script>
