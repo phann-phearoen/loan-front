@@ -125,9 +125,12 @@ export default {
   async apiNewLoan({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .post(`/api/v1/deposits/new_deposit`, {
-          id: payload.id,
+        .post(`/api/v1/loan/new_loan`, {
+          member_id: payload.memberId,
           amount: payload.amount,
+          rate: payload.rate,
+          period: payload.period,
+          pawn_id: payload.pawn_id,
         })
         .then((resp) => {
           const obj = resp.data
@@ -140,4 +143,31 @@ export default {
         .catch((err) => {})
     })
   },
+  async apiNewPawn({ state, dispatch, commit }, payload) {
+    return await new Promise((resolve, reject) => {
+      securedInst
+        .post(`/api/v1/pawn/new_pawn`, {
+          no: payload.no,
+          registered_date: payload.registerDate,
+          registered_by: payload.registeredBy,
+          surface_area: payload.surfaceArea,
+          estimate_value: payload.estimateValue,
+          north: payload.north,
+          south: payload.south,
+          east: payload.east,
+          west: payload.west,
+          other_assets: payload.otherAssets,
+        })
+        .then((resp) => {
+          const obj = resp.data
+          console.log(resp)
+          if (!obj) {
+            reject(new Error('API return value is wrong'))
+          }
+          resolve(resp)
+        })
+        .catch((err) => {})
+    })
+  },
+  
 }

@@ -107,175 +107,189 @@
     <v-card-text v-else>
       <v-card-title>អតិថិជនខាងក្រៅ</v-card-title>
       <v-divider></v-divider>
-      <v-text-field outlined label="ឈ្មោះ" clearable v-model="loanTaker.name">
-      </v-text-field>
-      <v-select
-        :items="loanTaker.gender"
-        outlined
-        label="ភេទ"
-      >
-      </v-select>
-      <v-text-field
-        outlined
-        label="ថ្ងៃខែឆ្នាំកំណើត"
-        type="date"
-        clearable
-        v-model="loanTaker.birthDate"
-      ></v-text-field>
-      <v-text-field
-        outlined
-        label="អាស័យដ្ឋាន"
-        type="adress"
-        clearable
-        v-model="loanTaker.address"
-      ></v-text-field>
-      <v-text-field
-        label="លេខអត្តសញ្ញាណប័ណ្ណ"
-        type="number"
-        outlined
-        clearable
-        v-model="loanTaker.national_id"
-      ></v-text-field>
-      <v-text-field
-        outlined
-        v-model="loan.amount"
-        label="ទឹកប្រាក់ដែលត្រូវខ្ចី"
-        suffix="៛"
-        type="number"
-        clearable
-      ></v-text-field>
-      <v-row>
-        <v-col>
-          <v-text-field
-            label="កាលបរិច្ឆេទខ្ជី"
-            v-model="loan.date"
-            outlined
-            type="date"
-            clearable
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            label="កាលបរិច្ឆេទសង"
-            outlined
-            type="date"
-            clearable
-            v-model="loan.to"
-          ></v-text-field>
-        </v-col>
-      </v-row>
+      <v-card-title>ព័ត៌មានផ្ទាល់ខ្លួន</v-card-title>
+      <v-form v-model="valid">
+        <v-text-field
+          outlined
+          label="ឈ្មោះ"
+          :rules="rules"
+          clearable
+          v-model="loanTaker.name"
+          requried
+        >
+        </v-text-field>
+        <v-select
+          v-model="loanTaker.gender"
+          :items="['ស្រី', 'ប្រុស']"
+          :rules="rules"
+          requried
+          outlined
+          label="ភេទ"
+          clearable
+        ></v-select>
+        <v-text-field
+          outlined
+          label="ថ្ងៃខែឆ្នាំកំណើត"
+          type="date"
+          clearable
+          v-model="loanTaker.dateOfBirth"
+          :rules="rules"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined
+          label="អាស័យដ្ឋាន"
+          type="adress"
+          clearable
+          v-model="loanTaker.address"
+          :rules="rules"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined
+          label="លេខទូរស័ព្ទ"
+          type="number"
+          clearable
+          v-model="loanTaker.phone"
+          :rules="rules"
+          required
+        ></v-text-field>
+        <v-text-field
+          label="លេខអត្តសញ្ញាណប័ណ្ណ"
+          type="number"
+          outlined
+          clearable
+          v-model="loanTaker.national_id"
+          :rules="rules"
+          required
+        ></v-text-field>
+        <v-card-title>ព័ត៌មានប្រាក់កម្ចី</v-card-title>
+        <v-text-field
+          outlined
+          v-model="loan.amount"
+          label="ទឹកប្រាក់ដែលត្រូវខ្ចី"
+          suffix="៛"
+          type="number"
+          clearable
+          :rules="rules"
+          required
+        ></v-text-field>
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="រយៈពេលខ្ចី"
+              suffix="ខែ"
+              outlined
+              type="number"
+              clearable
+              v-model="loan.period"
+              :rules="rules"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              label="អត្រាការប្រាក់"
+              suffix="%"
+              outlined
+              type="number"
+              clearable
+              v-model="loan.rate"
+              :rules="rules"
+              required
+            >
+            </v-text-field>
+          </v-col>
+        </v-row>
+        <v-card-title>ព័ត៌មានទ្រព្យបញ្ចាំ</v-card-title>
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="លេខប័ណ្ណសំគាល់លំនៅដ្ឋាន"
+              outlined
+              type="number"
+              clearable
+              v-model="pawn.no"
+            >
+            </v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              label="កាលបរិច្ឆេទចុះបញ្ជី"
+              outlined
+              type="date"
+              readonly
+              clearable
+              v-model="pawn.registerDate"
+            >
+            </v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="ទំហំដី"
+              outlined
+              type="number"
+              suffix="ម៉ែត្រការេ"
+              clearable
+              v-model="pawn.surfaceArea"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              label="តម្លៃដីប៉ាន់ស្មាន"
+              outlined
+              suffix="៛"
+              type="number"
+              clearable
+              v-model="pawn.estimateValue"
+            >
+            </v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              label="ព្រំប្រទល់ខាងជើង"
+              clearable
+              px-6
+              v-model="pawn.north"
+            ></v-text-field>
+          </v-col>
 
-      <v-row>
-        <v-col>
-          <v-text-field
-            label="រយៈពេលខ្ចី"
-            suffix="ខែ"
-            outlined
-            type="number"
-            clearable
-            v-model="loan.period"
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            label="អត្រាការប្រាក់"
-            suffix="%"
-            outlined
-            type="number"
-            clearable
-            v-model="loan.rate"
-          >
-          </v-text-field>
-        </v-col>
-      </v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              label="ព្រំប្រទល់ខាងត្បូង"
+              clearable
+              v-model="pawn.south"
+            ></v-text-field>
+          </v-col>
 
-      <v-row>
-        <v-col>
-          <v-text-field
-            label="លេខប័ណ្ណសំគាល់លំនៅដ្ឋាន"
-            outlined
-            type="number"
-            clearable
-            v-model="pawn.no"
-          >
-          </v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            label="កាលបរិច្ឆេទចុះបញ្ជី"
-            outlined
-            type="date"
-            readonly
-            clearable
-            v-model="pawn.registerDate"
-          >
-          </v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-text-field
-            label="ទំហំដី"
-            outlined
-            type="number"
-            suffix="ម៉ែត្រការេ"
-            clearable
-            v-model="pawn.surfaceArea"
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            label="តម្លៃដីប៉ាន់ស្មាន"
-            outlined
-            suffix="៛"
-            type="number"
-            clearable
-            v-model="pawn.estimateValue"
-          >
-          </v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-text-field
-            label="ព្រំប្រទល់ខាងជើង"
-            clearable
-            px-6
-            v-model="pawn.north"
-          ></v-text-field>
-        </v-col>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              label="ព្រំប្រទល់ខាងលិច"
+              clearable
+              v-model="pawn.west"
+            ></v-text-field>
+          </v-col>
 
-        <v-col cols="12" sm="6">
-          <v-text-field
-            label="ព្រំប្រទល់ខាងត្បូង"
-            clearable
-            v-model="pawn.south"
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="12" sm="6">
-          <v-text-field
-            label="ព្រំប្រទល់ខាងលិច"
-            clearable
-            v-model="pawn.west"
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="12" sm="6">
-          <v-text-field
-            label="ព្រំប្រទល់ខាងកើត"
-            clearable
-            v-model="pawn.east"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-text-field
-        label="ទ្រព្យសម្បត្តិដទៃទៀត"
-        clearable
-        v-model="pawn.otherAsset"
-        type="text"
-      >
-      </v-text-field>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              label="ព្រំប្រទល់ខាងកើត"
+              clearable
+              v-model="pawn.east"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-text-field
+          label="ទ្រព្យសម្បត្តិដទៃទៀត"
+          clearable
+          v-model="pawn.otherAsset"
+          type="text"
+        >
+        </v-text-field>
+      </v-form>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -317,16 +331,19 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      valid: false,
+      rules: [(v) => !!v || "សូមបំពេញទីនេះ"],
       forMembers: true,
       memberId: null,
       agreed: false,
       sheetCreated: false,
       loanTaker: {
         name: "",
-        gender: ["ប្រុស", "ស្រី"],
-        age: null,
+        gender: null,
+        dateOfBirth: null,
         address: "",
         national_id: "",
+        phone: null,
       },
       loan: {
         amount: null,
@@ -347,13 +364,15 @@ export default {
         west: "",
         otherAsset: "",
       },
+      memberIdToSubmit: null,
+      createdPawnId: null,
     };
   },
   computed: {
-    ...mapGetters('members', [
-      'getOneMember',
-      'getMemberToLoan',
-      'getThisMember',
+    ...mapGetters("members", [
+      "getOneMember",
+      "getMemberToLoan",
+      "getThisMember",
     ]),
   },
   methods: {
@@ -379,21 +398,24 @@ export default {
       this.amount = null;
     },
     doCreateAgreementForMember() {
-      sessionStorage.setItem('loanProvider', JSON.stringify(this.getThisMember))
-      sessionStorage.setItem('loanTaker', JSON.stringify(this.getMemberToLoan))
-      let now = new Date()
+      sessionStorage.setItem(
+        "loanProvider",
+        JSON.stringify(this.getThisMember)
+      );
+      sessionStorage.setItem("loanTaker", JSON.stringify(this.getMemberToLoan));
+      let now = new Date();
       const loan = {
         amount: parseInt(this.loan.amount).toLocaleString(),
         period: this.loan.period,
         rate: this.loan.rate,
         from: now.toISOString().slice(0, 10),
-        to: 
-          new Date(now.setMonth(now.getMonth() + parseInt(this.loan.period)))
-          .toISOString().slice(0, 10),
-      }
-      sessionStorage.setItem('loan', JSON.stringify(loan))
-      sessionStorage.setItem('pawn', JSON.stringify(this.pawn))
-      window.open(`/agreement_member`)
+        to: new Date(now.setMonth(now.getMonth() + parseInt(this.loan.period)))
+          .toISOString()
+          .slice(0, 10),
+      };
+      sessionStorage.setItem("loan", JSON.stringify(loan));
+      sessionStorage.setItem("pawn", JSON.stringify(this.pawn));
+      window.open(`/agreement_member`);
     },
     doCreateRepaySheet() {
       this.sheetCreated = true;
@@ -405,14 +427,53 @@ export default {
       sessionStorage.setItem("loanObject", JSON.stringify(obj));
       window.open("/repay_sheet");
     },
-    submit() {},
+    async submit() {
+      this.memberIdToSubmit = this.getMemberToLoan.id;
+      if (!this.forMembers) {
+        await this.$store
+          .dispatch("members/apiCreateNewMember", {
+            name: this.loanTaker.name,
+            gender: this.loanTaker.gender,
+            dateOfBirth: this.loanTaker.dateOfBirth,
+            nationlId: this.loanTaker.national_id,
+            phone: this.loanTaker.phone,
+            address: this.loanTaker.address,
+            isClient: true,
+          })
+          .then((resp) => {
+            this.memberIdToSubmit = resp.data.member.id;
+          })
+          .catch()
+          .finally();
+        await this.$store
+          .dispatch("members/apiNewPawn", this.pawn)
+          .then((resp) => {
+            this.createdPawnId = resp.data.pawn.id;
+          })
+          .catch()
+          .finally();
+      }
+      await this.$store
+        .dispatch("members/apiNewLoan", {
+          memberId: this.memberIdToSubmit,
+          amount: this.loan.amount,
+          rate: this.loan.rate,
+          period: this.loan.period,
+          pawn_id: this.createdPawnId || null,
+        })
+        .then((resp) => {
+          this.$nuxt.$emit("setSnackbar", "ប្រត្តិបត្តិការណ៍ជោគជ័យ។");
+        })
+        .catch()
+        .finally();
+    },
   },
   mounted() {
     if (!this.getThisMember) {
-      this.$store.dispatch('members/getThisMember')
+      this.$store.dispatch("members/getThisMember");
     }
   },
-}
+};
 </script>
 
 <style scoped>
