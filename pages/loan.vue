@@ -410,14 +410,14 @@ export default {
             isClient: true,
           })
           .then((resp) => {
-            this.memberIdToSubmit = resp.data.member.id
+            this.memberIdToSubmit = resp.data.id
           })
           .catch()
           .finally()
         await this.$store
           .dispatch('members/apiNewPawn', this.pawn)
           .then((resp) => {
-            this.createdPawnId = resp.data.pawn.id
+            this.createdPawnId = resp.data.id
           })
           .catch()
           .finally()

@@ -125,7 +125,7 @@ export default {
   async apiNewLoan({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .post(`/api/v1/loan/new_loan`, {
+        .post(`/api/v1/loans/new_loan`, {
           member_id: payload.memberId,
           amount: payload.amount,
           rate: payload.rate,
@@ -146,7 +146,7 @@ export default {
   async apiNewPawn({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .post(`/api/v1/pawn/new_pawn`, {
+        .post(`/api/v1/pawns/new_pawn`, {
           no: payload.no,
           registered_date: payload.registerDate,
           registered_by: payload.registeredBy,
