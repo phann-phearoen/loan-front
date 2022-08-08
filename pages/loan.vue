@@ -121,7 +121,7 @@
         label="ថ្ងៃខែឆ្នាំកំណើត"
         type="date"
         clearable
-        v-model="loanTaker.birthDate"
+        v-model="loanTaker.dateOfBirth"
       ></v-text-field>
       <v-text-field
         outlined
@@ -129,6 +129,13 @@
         type="adress"
         clearable
         v-model="loanTaker.address"
+      ></v-text-field>
+       <v-text-field
+        outlined
+        label="លេខទូរស័ព្ទ"
+        type="phone"
+        clearable
+        v-model="loanTaker.phone"
       ></v-text-field>
       <v-text-field
         label="លេខអត្តសញ្ញាណប័ណ្ណ"
@@ -305,9 +312,10 @@ export default {
       loanTaker: {
         name: "",
         gender: null,
-        age: null,
+        dateOfBirth: null,
         address: "",
         national_id: "",
+        phone: null,
       },
       loan: {
         amount: null,
@@ -328,7 +336,9 @@ export default {
         west: "",
         otherAsset: "",
       },
-    };
+      memberIdToSubmit: null,
+      createdPawnId: null,
+    }
   },
   computed: {
     ...mapGetters('members', [
@@ -386,7 +396,46 @@ export default {
       sessionStorage.setItem("loanObject", JSON.stringify(obj));
       window.open("/repay_sheet");
     },
-    submit() {},
+    async submit() {
+      this.memberIdToSubmit = this.getMemberToLoan.id
+      if (!this.forMembers) {
+        await this.$store
+          .dispatch('members/apiCreateNewMember', {
+            name: this.loanTaker.name,
+            gender: this.loanTaker.gender,
+            dateOfBirth: this.loanTaker.dateOfBirth,
+            nationlId: this.loanTaker.national_id,
+            phone: this.loanTaker.phone,
+            address: this.loanTaker.address,
+            isClient: true,
+          })
+          .then((resp) => {
+            this.memberIdToSubmit = resp.data.member.id
+          })
+          .catch()
+          .finally()
+        await this.$store
+          .dispatch('members/apiNewPawn', this.pawn)
+          .then((resp) => {
+            this.createdPawnId = resp.data.pawn.id
+          })
+          .catch()
+          .finally()
+      }
+      await this.$store
+        .dispatch('members/apiNewLoan', {
+          memberId: this.memberIdToSubmit,
+          amount: this.loan.amount,
+          rate: this.loan.rate,
+          period: this.loan.period,
+          pawn_id: this.createdPawnId || null,
+        })
+        .then((resp) => {
+          this.$nuxt.$emit('setSnackbar', 'ប្រត្តិបត្តិការណ៍ជោគជ័យ។')
+        })
+        .catch()
+        .finally()
+    },
   },
   mounted() {
     if (!this.getThisMember) {
