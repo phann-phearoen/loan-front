@@ -433,6 +433,9 @@ export default {
         })
         .then((resp) => {
           this.$nuxt.$emit('setSnackbar', 'ប្រត្តិបត្តិការណ៍ជោគជ័យ។')
+          if (this.forMembers) {
+            this.$router.push(`/members/${this.memberIdToSubmit}`)
+          }
         })
         .catch()
         .finally()
