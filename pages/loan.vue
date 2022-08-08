@@ -397,14 +397,14 @@ export default {
       window.open("/repay_sheet");
     },
     async submit() {
-      this.memberIdToSubmit = this.getMemberToLoan.id
+      this.memberIdToSubmit = this.getMemberToLoan?.id
       if (!this.forMembers) {
         await this.$store
           .dispatch('members/apiCreateNewMember', {
             name: this.loanTaker.name,
             gender: this.loanTaker.gender,
             date_of_birth: this.loanTaker.date_of_birth,
-            nationlId: this.loanTaker.national_id,
+            national_id: this.loanTaker.national_id,
             phone: this.loanTaker.phone,
             address: this.loanTaker.address,
             isClient: true,

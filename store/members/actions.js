@@ -30,8 +30,8 @@ export default {
         .post(`/api/v1/members/create_new_member`, {
           name: payload.name,
           gender: payload.gender,
-          date_of_birth: payload.dateOfBirth,
-          national_id: payload.nationalId,
+          date_of_birth: payload.date_of_birth,
+          national_id: payload.national_id,
           phone: payload.phone,
           address: payload.address,
           is_client: payload.isClient || false,
