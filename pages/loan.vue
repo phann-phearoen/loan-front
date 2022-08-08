@@ -112,11 +112,10 @@
       </v-text-field>
       <v-select
         v-model="loanTaker.gender"
-        :items="loanTaker.gender"
+        :items="['ស្រី', 'ប្រុស']"
         outlined
         label="ភេទ"
-      >
-      </v-select>
+      ></v-select>
       <v-text-field
         outlined
         label="ថ្ងៃខែឆ្នាំកំណើត"
@@ -305,7 +304,7 @@ export default {
       sheetCreated: false,
       loanTaker: {
         name: "",
-        gender: ["ប្រុស", "ស្រី"],
+        gender: null,
         age: null,
         address: "",
         national_id: "",
