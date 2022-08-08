@@ -121,7 +121,7 @@
         label="ថ្ងៃខែឆ្នាំកំណើត"
         type="date"
         clearable
-        v-model="loanTaker.dateOfBirth"
+        v-model="loanTaker.date_of_birth"
       ></v-text-field>
       <v-text-field
         outlined
@@ -194,7 +194,7 @@
             label="ថ្ងៃខែឆ្នាំចុះបញ្ជី"
             type="date"
             clearable
-            v-model="loan.registerDate"
+            v-model="pawn.registerDate"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -266,7 +266,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="!getMemberToLoan || !loan.amount || !loan.period"
+        :disabled="!loan.amount || !loan.period"
         color="primary"
         min-width="200"
         @click="doCreateAgreementForMember"
@@ -274,7 +274,7 @@
         បង្កើតកិច្ចសន្យា
       </v-btn>
       <v-btn
-        :disabled="!getMemberToLoan || !loan.amount || !loan.period"
+        :disabled="!loan.amount || !loan.period"
         color="primary"
         min-width="200"
         @click="doCreateRepaySheet"
@@ -310,7 +310,7 @@ export default {
       loanTaker: {
         name: "",
         gender: null,
-        dateOfBirth: null,
+        date_of_birth: null,
         address: "",
         national_id: "",
         phone: null,
@@ -370,7 +370,8 @@ export default {
     doCreateAgreementForMember() {
       this.agreed = true
       sessionStorage.setItem('loanProvider', JSON.stringify(this.getThisMember))
-      sessionStorage.setItem('loanTaker', JSON.stringify(this.getMemberToLoan))
+      const loanTakerObj = this.forMembers ? this.getMemberToLoan : this.loanTaker
+      sessionStorage.setItem('loanTaker', JSON.stringify(loanTakerObj))
       let now = new Date()
       const loan = {
         amount: parseInt(this.loan.amount).toLocaleString(),
@@ -402,7 +403,7 @@ export default {
           .dispatch('members/apiCreateNewMember', {
             name: this.loanTaker.name,
             gender: this.loanTaker.gender,
-            dateOfBirth: this.loanTaker.dateOfBirth,
+            date_of_birth: this.loanTaker.date_of_birth,
             nationlId: this.loanTaker.national_id,
             phone: this.loanTaker.phone,
             address: this.loanTaker.address,
