@@ -112,16 +112,16 @@
         <v-text-field
           outlined
           label="ឈ្មោះ"
-          :rules="rules"
           clearable
           v-model="loanTaker.name"
+          :rules="[(v) => !!v || 'សូមបំពេញឈ្នោះនៅទីនេះ']"
           requried
         >
         </v-text-field>
         <v-select
           v-model="loanTaker.gender"
           :items="['ស្រី', 'ប្រុស']"
-          :rules="rules"
+          :rules="[(v) => !!v || 'សូមជ្រើសរើសភេទ']"
           requried
           outlined
           label="ភេទ"
@@ -133,7 +133,7 @@
           type="date"
           clearable
           v-model="loanTaker.dateOfBirth"
-          :rules="rules"
+          :rules="[(v) => !!v || 'សូមបំពេញថ្ងៃខែឆ្នាំកំណើតនៅទីនេះ']"
           required
         ></v-text-field>
         <v-text-field
@@ -142,7 +142,7 @@
           type="adress"
           clearable
           v-model="loanTaker.address"
-          :rules="rules"
+          :rules="[(v) => !!v || 'សូមបំពេញអាស័យដ្ឋាននៅទីនេះ']"
           required
         ></v-text-field>
         <v-text-field
@@ -151,7 +151,7 @@
           type="number"
           clearable
           v-model="loanTaker.phone"
-          :rules="rules"
+          :rules="[(v) => !!v || 'សូមបំពេញលេខទូរស័ព្ទនៅទីនេះ']"
           required
         ></v-text-field>
         <v-text-field
@@ -160,7 +160,7 @@
           outlined
           clearable
           v-model="loanTaker.national_id"
-          :rules="rules"
+          :rules="[(v) => !!v || 'សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណនៅទីនេះ']"
           required
         ></v-text-field>
         <v-card-title>ព័ត៌មានប្រាក់កម្ចី</v-card-title>
@@ -171,7 +171,7 @@
           suffix="៛"
           type="number"
           clearable
-          :rules="rules"
+          :rules="[(v) => !!v || 'សូមបំពេញចំនួនទឹកប្រាក់ដែលត្រូវខ្ចី']"
           required
         ></v-text-field>
         <v-row>
@@ -183,7 +183,7 @@
               type="number"
               clearable
               v-model="loan.period"
-              :rules="rules"
+              :rules="[(v) => !!v || 'សូមបំពេញរយៈពេលដែលត្រូវខ្ចី']"
               required
             ></v-text-field>
           </v-col>
@@ -195,7 +195,7 @@
               type="number"
               clearable
               v-model="loan.rate"
-              :rules="rules"
+              :rules="[(v) => !!v || 'សូមបំពេញអត្រាការប្រាក់']"
               required
             >
             </v-text-field>
@@ -332,7 +332,7 @@ export default {
   data() {
     return {
       valid: false,
-      rules: [(v) => !!v || "សូមបំពេញទីនេះ"],
+      rules: [(v) => !!v || "សូមបំពេញនៅទីនេះ"],
       forMembers: true,
       memberId: null,
       agreed: false,
