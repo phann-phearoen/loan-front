@@ -350,7 +350,7 @@ export default {
         period: null,
         from: "",
         to: "",
-        rate: 3,
+        rate: null,
       },
       pawn: {
         no: null,
