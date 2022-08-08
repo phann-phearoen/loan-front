@@ -1,52 +1,123 @@
 <template>
-    <v-card width="100%" v-if="oneMember">
-      <v-card-title class="justify-center text-h5">
-      {{ oneMember.name }}
-      </v-card-title>
-      <v-divider></v-divider>
-      <v-card-text class="px-16">
-        <v-row class="detail-row">
-          <v-col class="text-h6" cols="3" align-self="end"> ឈ្មោះ </v-col>
-          <v-col align-self="end" class="text-h6">
-            {{ oneMember.name }}
-          </v-col>
-        </v-row>
-        <v-divider></v-divider>
-        <v-row class="detail-row">
-          <v-col class="text-h6" cols="3" align-self="end"> ភេទ </v-col>
-          <v-col align-self="end" class="text-h6">
-            {{ oneMember.gender }}
-          </v-col>
-        </v-row>
-        <v-divider></v-divider>
-        <v-row class="detail-row">
-          <v-col class="text-h6" cols="3" align-self="end">
-            ប្រាក់សន្សំសរុប
-          </v-col>
-          <v-col align-self="end" class="text-h6">
+  <v-card width="100%" v-if="oneMember" color="#E0F7FA">
+    <v-card-title class="justify-center text-h5">
+      <v-row>
+        <v-col class="text-h6" cols="3" align-self="end">
+          <v-progress-circular
+            rotate="360"
+            size="100"
+            width="15"
+            color="teal"
+          >
             {{ oneMember.deposit }} ៛
-          </v-col>
-        </v-row>
-        <v-divider></v-divider>
-        <v-row class="detail-row">
-          <v-col class="text-h6" cols="3" align-self="end">
-            ប្រាក់កម្ចីសរុប
-          </v-col>
-          <v-col align-self="end" class="text-h6">
+          </v-progress-circular>
+          <v-progress-circular
+            rotate="360"
+            size="100"
+            width="15"
+            color="red"
+          >
             {{ oneMember.loan }} ៛
-          </v-col>
-        </v-row>
-        <v-divider></v-divider>
-      </v-card-text>
+          </v-progress-circular>
+        </v-col>
+        <v-col align-self="end" class="text-h6">
+          <v-card-title>
+          {{ oneMember.name }}
+          </v-card-title>
+        </v-col>
+      </v-row>
+    </v-card-title>
+    <v-divider></v-divider>
 
-      <v-card-actions>
-          <v-btn x-large color="primary" @click="toDeposit">
-            ដាក់ប្រាក់សន្សំ
-          </v-btn>
-          <v-btn x-large color="primary" @click="toRepay"> សងប្រាក់ </v-btn>
-      </v-card-actions>
-      
-    </v-card>
+    <v-card-text>
+      <div class="text--primary">
+        <!-- Using the elevation prop -->
+        <v-hover>
+          <template v-slot:default="{ hover }">
+            <div
+              :class="`elevation-${hover ? 24 : 6}`"
+              class="mx-auto pa-6 transition-swing"
+            >
+              <v-row>
+                <v-col class="text-h6" cols="3" align-self="end"> ឈ្មោះ </v-col>
+                <v-col align-self="end" class="text-h6">
+                  {{ oneMember.name }}
+                </v-col>
+              </v-row>
+            </div>
+          </template>
+        </v-hover>
+
+        <div class="my-2"></div>
+
+        <!-- Using a dynamic class -->
+        <v-hover>
+          <template v-slot:default="{ hover }">
+            <div
+              :class="`elevation-${hover ? 24 : 6}`"
+              class="mx-auto pa-6 transition-swing"
+            >
+              <v-row>
+                <v-col class="text-h6" cols="3" align-self="end"> ភេទ </v-col>
+                <v-col align-self="end" class="text-h6">
+                  {{ oneMember.gender }}
+                </v-col>
+              </v-row>
+            </div>
+          </template>
+        </v-hover>
+
+        <div class="my-2"></div>
+
+        <v-hover >
+          <template v-slot:default="{ hover }">
+            <div
+              :class="`elevation-${hover ? 24 : 6}`"
+              class="mx-auto pa-6 transition-swing teal"
+              color="teal"
+            >
+              <v-row>
+                <v-col class="text-h6" cols="3" align-self="end">
+                  ប្រាក់សន្សំសរុប
+                </v-col>
+                <v-col align-self="end" class="text-h6">
+                  {{ oneMember.deposit }} ៛
+                </v-col>
+              </v-row>
+            </div>
+          </template>
+        </v-hover>
+
+        <div class="my-2"></div>
+
+        <v-hover>
+          <template v-slot:default="{ hover }" >
+            <div
+              :class="`elevation-${hover ? 24 : 6}`"
+              class="mx-auto pa-6 transition-swing red"
+            >
+              <v-row>
+                <v-col class="text-h6" cols="3" align-self="end" >
+                  ប្រាក់កម្ចី
+                </v-col>
+                <v-col align-self="end" class="text-h6">
+                  {{ oneMember.loan }}​​ ៛
+                </v-col>
+              </v-row>
+            </div>
+          </template>
+        </v-hover>
+        <div class="d-flex justify-center my-4">
+          <v-card-action class="justify-center">
+            <v-btn x-large color="primary" @click="toDeposit">
+              ដាក់ប្រាក់សន្សំ
+            </v-btn>
+            <v-btn x-large color="primary" @click="toRepay"> សងប្រាក់ </v-btn>
+          </v-card-action>
+        </div>
+      </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
