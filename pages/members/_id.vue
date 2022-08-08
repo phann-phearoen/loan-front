@@ -46,13 +46,6 @@
         <v-btn x-large color="primary" @click="toRepay"> សងប្រាក់ </v-btn>
       </v-card-actions>
     </v-card>
-    <v-card color="indigo">
-      <v-card-title class="justify-center text-h5">
-        {{ oneMember.name }}({{oneMember.gender}})
-      </v-card-title>
-      <v-divider></v-divider>
-      <v-row></v-row>
-    </v-card>
   </div>
 </template>
 
