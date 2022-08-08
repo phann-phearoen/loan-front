@@ -190,14 +190,12 @@
         </v-col>
         <v-col>
           <v-text-field
-            label="កាលបរិច្ឆេទចុះបញ្ជី"
             outlined
+            label="ថ្ងៃខែឆ្នាំចុះបញ្ជី"
             type="date"
-            readonly
             clearable
-            v-model="pawn.registerDate"
-          >
-          </v-text-field>
+            v-model="loan.registerDate"
+          ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -326,7 +324,7 @@ export default {
       },
       pawn: {
         no: null,
-        registerDate: "",
+        registerDate: null,
         registeredBy: "",
         surfaceArea: null,
         estimateValue: null,
