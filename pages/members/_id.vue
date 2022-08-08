@@ -36,7 +36,7 @@
           <template v-slot:default="{ hover }">
             <div
               :class="`elevation-${hover ? 24 : 6}`"
-              class="mx-auto pa-6 transition-swing"
+              class="mx-auto pa-6 transition-swing rounded-lg"
             >
               <v-row>
                 <v-col class="text-h6" cols="3" align-self="end"> ឈ្មោះ </v-col>
@@ -55,7 +55,7 @@
           <template v-slot:default="{ hover }">
             <div
               :class="`elevation-${hover ? 24 : 6}`"
-              class="mx-auto pa-6 transition-swing"
+              class="mx-auto pa-6 transition-swing rounded-lg"
             >
               <v-row>
                 <v-col class="text-h6" cols="3" align-self="end"> ភេទ </v-col>
@@ -73,7 +73,7 @@
           <template v-slot:default="{ hover }">
             <div
               :class="`elevation-${hover ? 24 : 6}`"
-              class="mx-auto pa-6 transition-swing teal"
+              class="mx-auto pa-6 transition-swing teal rounded-lg"
               color="teal"
             >
               <v-row>
@@ -94,7 +94,7 @@
           <template v-slot:default="{ hover }" >
             <div
               :class="`elevation-${hover ? 24 : 6}`"
-              class="mx-auto pa-6 transition-swing red"
+              class="mx-auto pa-6 transition-swing rounded-lg red accent-3"
             >
               <v-row>
                 <v-col class="text-h6" cols="3" align-self="end" >
