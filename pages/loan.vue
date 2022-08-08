@@ -107,6 +107,7 @@
     <v-card-text v-else>
       <v-card-title>អតិថិជនខាងក្រៅ</v-card-title>
       <v-divider></v-divider>
+      <v-card-title>ព័ត៌មានផ្ទាល់ខ្លួន</v-card-title>
       <v-text-field outlined label="ឈ្មោះ" clearable v-model="loanTaker.name">
       </v-text-field>
       <v-select
@@ -137,6 +138,7 @@
         clearable
         v-model="loanTaker.national_id"
       ></v-text-field>
+      <v-card-title>ព័ត៌មានប្រាក់កម្ចី</v-card-title>
       <v-text-field
         outlined
         v-model="loan.amount"
@@ -145,27 +147,6 @@
         type="number"
         clearable
       ></v-text-field>
-      <v-row>
-        <v-col>
-          <v-text-field
-            label="កាលបរិច្ឆេទខ្ជី"
-            v-model="loan.date"
-            outlined
-            type="date"
-            clearable
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            label="កាលបរិច្ឆេទសង"
-            outlined
-            type="date"
-            clearable
-            v-model="loan.to"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-
       <v-row>
         <v-col>
           <v-text-field
@@ -189,7 +170,7 @@
           </v-text-field>
         </v-col>
       </v-row>
-
+      <v-card-title>ព័ត៌មានទ្រព្យបញ្ចាំ</v-card-title>
       <v-row>
         <v-col>
           <v-text-field
