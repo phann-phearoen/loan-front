@@ -397,7 +397,6 @@ export default {
       window.open("/repay_sheet");
     },
     async submit() {
-      this.memberIdToSubmit = this.getMemberToLoan?.id
       if (!this.forMembers) {
         await this.$store
           .dispatch('members/apiCreateNewMember', {
@@ -424,7 +423,7 @@ export default {
       }
       await this.$store
         .dispatch('members/apiNewLoan', {
-          memberId: this.memberIdToSubmit,
+          memberId: this.memberIdToSubmit || this.getMemberToLoan,
           amount: this.loan.amount,
           rate: this.loan.rate,
           period: this.loan.period,
@@ -433,8 +432,9 @@ export default {
         .then((resp) => {
           this.$nuxt.$emit('setSnackbar', 'ប្រត្តិបត្តិការណ៍ជោគជ័យ។')
           if (this.forMembers) {
-            this.$router.push(`/members/${this.memberIdToSubmit}`)
+            return this.$router.push(`/members/${this.memberIdToSubmit}`)
           }
+          this.$router.push(`/clients/${this.memberIdToSubmit}`)
         })
         .catch()
         .finally()

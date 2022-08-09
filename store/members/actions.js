@@ -143,7 +143,7 @@ export default {
         .catch((err) => {})
     })
   },
-  async apiNewPawn({ state, dispatch, commit }, payload) {
+  async apiNewPawn({ }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
         .post(`/api/v1/pawns/new_pawn`, {
