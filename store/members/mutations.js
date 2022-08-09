@@ -17,4 +17,7 @@ export default {
   set_loan_object(state, payload) {
     state.loanObject = payload
   },
+  set_all_clients(state, payload) {
+    state.allClients = payload
+  },
 }

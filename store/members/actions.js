@@ -169,5 +169,25 @@ export default {
         .catch((err) => {})
     })
   },
-  
+  async getAllClients({ dispatch, commit }, payload) {
+    return await new Promise((resolve, reject) => {
+      securedInst
+        .get(`/api/v1/members/get_all_clients`, {
+          params: {
+            page: payload.page,
+            per: payload.itemsPerPage,
+          }
+        })
+        .then((resp) => {
+          const obj = resp.data
+          console.log(obj)
+          if (!obj) {
+            reject(new Error('API return value is wrong'))
+          }
+          resolve(resp)
+          commit('set_all_clients', obj.clients)
+        })
+        .catch((err) => {})
+    })
+  },
 }

@@ -9,6 +9,7 @@ export const state = () => ({
   memberToDeposit: null,
   memberToLoan: null,
   loanObject: null,
+  allClients: [],
 })
 
 export default {
