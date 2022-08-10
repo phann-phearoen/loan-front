@@ -30,8 +30,8 @@ export default {
         .post(`/api/v1/members/create_new_member`, {
           name: payload.name,
           gender: payload.gender,
-          date_of_birth: payload.dateOfBirth,
-          national_id: payload.nationalId,
+          date_of_birth: payload.date_of_birth,
+          national_id: payload.national_id,
           phone: payload.phone,
           address: payload.address,
           is_client: payload.isClient || false,
@@ -125,9 +125,12 @@ export default {
   async apiNewLoan({ state, dispatch, commit }, payload) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .post(`/api/v1/deposits/new_deposit`, {
-          id: payload.id,
+        .post(`/api/v1/loans/new_loan`, {
+          member_id: payload.memberId,
           amount: payload.amount,
+          rate: payload.rate,
+          period: payload.period,
+          pawn_id: payload.pawn_id,
         })
         .then((resp) => {
           const obj = resp.data
@@ -136,6 +139,53 @@ export default {
             reject(new Error('API return value is wrong'))
           }
           resolve(resp)
+        })
+        .catch((err) => {})
+    })
+  },
+  async apiNewPawn({ }, payload) {
+    return await new Promise((resolve, reject) => {
+      securedInst
+        .post(`/api/v1/pawns/new_pawn`, {
+          no: payload.no,
+          registered_date: payload.registerDate,
+          registered_by: payload.registeredBy,
+          surface_area: payload.surfaceArea,
+          estimate_value: payload.estimateValue,
+          north: payload.north,
+          south: payload.south,
+          east: payload.east,
+          west: payload.west,
+          other_assets: payload.otherAssets,
+        })
+        .then((resp) => {
+          const obj = resp.data
+          console.log(resp)
+          if (!obj) {
+            reject(new Error('API return value is wrong'))
+          }
+          resolve(resp)
+        })
+        .catch((err) => {})
+    })
+  },
+  async getAllClients({ dispatch, commit }, payload) {
+    return await new Promise((resolve, reject) => {
+      securedInst
+        .get(`/api/v1/members/get_all_clients`, {
+          params: {
+            page: payload.page,
+            per: payload.itemsPerPage,
+          }
+        })
+        .then((resp) => {
+          const obj = resp.data
+          console.log(obj)
+          if (!obj) {
+            reject(new Error('API return value is wrong'))
+          }
+          resolve(resp)
+          commit('set_all_clients', obj.clients)
         })
         .catch((err) => {})
     })

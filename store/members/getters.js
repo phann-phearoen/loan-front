@@ -5,4 +5,5 @@ export default {
   getMemberToDeoposit: (state) => state.memberToDeposit,
   getMemberToLoan: (state) => state.memberToLoan,
   getLoanObject: (state) => state.loanObject,
+  getAllClients: (state) => state.allClients,
 }

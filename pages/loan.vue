@@ -107,21 +107,21 @@
     <v-card-text v-else>
       <v-card-title>អតិថិជនខាងក្រៅ</v-card-title>
       <v-divider></v-divider>
+      <v-card-title>ព័ត៌មានផ្ទាល់ខ្លួន</v-card-title>
       <v-text-field outlined label="ឈ្មោះ" clearable v-model="loanTaker.name">
       </v-text-field>
       <v-select
         v-model="loanTaker.gender"
-        :items="loanTaker.gender"
+        :items="['ស្រី', 'ប្រុស']"
         outlined
         label="ភេទ"
-      >
-      </v-select>
+      ></v-select>
       <v-text-field
         outlined
         label="ថ្ងៃខែឆ្នាំកំណើត"
         type="date"
         clearable
-        v-model="loanTaker.birthDate"
+        v-model="loanTaker.date_of_birth"
       ></v-text-field>
       <v-text-field
         outlined
@@ -130,6 +130,13 @@
         clearable
         v-model="loanTaker.address"
       ></v-text-field>
+       <v-text-field
+        outlined
+        label="លេខទូរស័ព្ទ"
+        type="phone"
+        clearable
+        v-model="loanTaker.phone"
+      ></v-text-field>
       <v-text-field
         label="លេខអត្តសញ្ញាណប័ណ្ណ"
         type="number"
@@ -137,6 +144,7 @@
         clearable
         v-model="loanTaker.national_id"
       ></v-text-field>
+      <v-card-title>ព័ត៌មានប្រាក់កម្ចី</v-card-title>
       <v-text-field
         outlined
         v-model="loan.amount"
@@ -145,27 +153,6 @@
         type="number"
         clearable
       ></v-text-field>
-      <v-row>
-        <v-col>
-          <v-text-field
-            label="កាលបរិច្ឆេទខ្ជី"
-            v-model="loan.date"
-            outlined
-            type="date"
-            clearable
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            label="កាលបរិច្ឆេទសង"
-            outlined
-            type="date"
-            clearable
-            v-model="loan.to"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-
       <v-row>
         <v-col>
           <v-text-field
@@ -189,7 +176,7 @@
           </v-text-field>
         </v-col>
       </v-row>
-
+      <v-card-title>ព័ត៌មានទ្រព្យបញ្ចាំ</v-card-title>
       <v-row>
         <v-col>
           <v-text-field
@@ -203,14 +190,12 @@
         </v-col>
         <v-col>
           <v-text-field
-            label="កាលបរិច្ឆេទចុះបញ្ជី"
             outlined
+            label="ថ្ងៃខែឆ្នាំចុះបញ្ជី"
             type="date"
-            readonly
             clearable
             v-model="pawn.registerDate"
-          >
-          </v-text-field>
+          ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -281,7 +266,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="!getMemberToLoan || !loan.amount || !loan.period"
+        :disabled="!loan.amount || !loan.period"
         color="primary"
         min-width="200"
         @click="doCreateAgreementForMember"
@@ -289,7 +274,7 @@
         បង្កើតកិច្ចសន្យា
       </v-btn>
       <v-btn
-        :disabled="!getMemberToLoan || !loan.amount || !loan.period"
+        :disabled="!loan.amount || !loan.period"
         color="primary"
         min-width="200"
         @click="doCreateRepaySheet"
@@ -324,10 +309,11 @@ export default {
       sheetCreated: false,
       loanTaker: {
         name: "",
-        gender: ["ប្រុស", "ស្រី"],
-        age: null,
+        gender: null,
+        date_of_birth: null,
         address: "",
         national_id: "",
+        phone: null,
       },
       loan: {
         amount: null,
@@ -338,7 +324,7 @@ export default {
       },
       pawn: {
         no: null,
-        registerDate: "",
+        registerDate: null,
         registeredBy: "",
         surfaceArea: null,
         estimateValue: null,
@@ -348,7 +334,9 @@ export default {
         west: "",
         otherAsset: "",
       },
-    };
+      memberIdToSubmit: null,
+      createdPawnId: null,
+    }
   },
   computed: {
     ...mapGetters('members', [
@@ -380,8 +368,10 @@ export default {
       this.amount = null;
     },
     doCreateAgreementForMember() {
+      this.agreed = true
       sessionStorage.setItem('loanProvider', JSON.stringify(this.getThisMember))
-      sessionStorage.setItem('loanTaker', JSON.stringify(this.getMemberToLoan))
+      const loanTakerObj = this.forMembers ? this.getMemberToLoan : this.loanTaker
+      sessionStorage.setItem('loanTaker', JSON.stringify(loanTakerObj))
       let now = new Date()
       const loan = {
         amount: parseInt(this.loan.amount).toLocaleString(),
@@ -406,7 +396,49 @@ export default {
       sessionStorage.setItem("loanObject", JSON.stringify(obj));
       window.open("/repay_sheet");
     },
-    submit() {},
+    async submit() {
+      if (!this.forMembers) {
+        await this.$store
+          .dispatch('members/apiCreateNewMember', {
+            name: this.loanTaker.name,
+            gender: this.loanTaker.gender,
+            date_of_birth: this.loanTaker.date_of_birth,
+            national_id: this.loanTaker.national_id,
+            phone: this.loanTaker.phone,
+            address: this.loanTaker.address,
+            isClient: true,
+          })
+          .then((resp) => {
+            this.memberIdToSubmit = resp.data.id
+          })
+          .catch()
+          .finally()
+        await this.$store
+          .dispatch('members/apiNewPawn', this.pawn)
+          .then((resp) => {
+            this.createdPawnId = resp.data.id
+          })
+          .catch()
+          .finally()
+      }
+      await this.$store
+        .dispatch('members/apiNewLoan', {
+          memberId: this.memberIdToSubmit || this.getMemberToLoan,
+          amount: this.loan.amount,
+          rate: this.loan.rate,
+          period: this.loan.period,
+          pawn_id: this.createdPawnId || null,
+        })
+        .then((resp) => {
+          this.$nuxt.$emit('setSnackbar', 'ប្រត្តិបត្តិការណ៍ជោគជ័យ។')
+          if (this.forMembers) {
+            return this.$router.push(`/members/${this.memberIdToSubmit}`)
+          }
+          this.$router.push(`/clients/${this.memberIdToSubmit}`)
+        })
+        .catch()
+        .finally()
+    },
   },
   mounted() {
     if (!this.getThisMember) {
