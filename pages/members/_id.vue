@@ -1,5 +1,5 @@
 <template>
-  <v-card width="100%" v-if="oneMember" color="#E0F7FA">
+  <v-card width="100%" v-if="oneMember" >
     <v-card-title class="justify-center text-h5">
       <v-row>
         <v-col class="text-h6" cols="3" align-self="end">
@@ -35,7 +35,7 @@
         <v-hover>
           <template v-slot:default="{ hover }">
             <div
-              :class="`elevation-${hover ? 24 : 6}`"
+              :class="`elevation-${hover ? 24 : 3}`"
               class="mx-auto pa-6 transition-swing rounded-lg"
             >
               <v-row>
@@ -54,7 +54,7 @@
         <v-hover>
           <template v-slot:default="{ hover }">
             <div
-              :class="`elevation-${hover ? 24 : 6}`"
+              :class="`elevation-${hover ? 24 : 3}`"
               class="mx-auto pa-6 transition-swing rounded-lg"
             >
               <v-row>
@@ -72,16 +72,20 @@
         <v-hover >
           <template v-slot:default="{ hover }">
             <div
-              :class="`elevation-${hover ? 24 : 6}`"
-              class="mx-auto pa-6 transition-swing teal rounded-lg"
-              color="teal"
+              :class="`elevation-${hover ? 24 : 3}`"
+              class="mx-auto pa-6 transition-swing rounded-lg"
+          
             >
-              <v-row>
+              <v-row >
                 <v-col class="text-h6" cols="3" align-self="end">
+                  <p style="color:teal">
                   ប្រាក់សន្សំសរុប
+                  </p>
                 </v-col>
                 <v-col align-self="end" class="text-h6">
+                  <p style="color:teal">
                   {{ oneMember.deposit }} ៛
+                  </p>
                 </v-col>
               </v-row>
             </div>
@@ -93,15 +97,17 @@
         <v-hover>
           <template v-slot:default="{ hover }" >
             <div
-              :class="`elevation-${hover ? 24 : 6}`"
-              class="mx-auto pa-6 transition-swing rounded-lg red accent-3"
+              :class="`elevation-${hover ? 24 : 3}`"
+              class="mx-auto pa-6 transition-swing rounded-lg "
             >
               <v-row>
                 <v-col class="text-h6" cols="3" align-self="end" >
-                  ប្រាក់កម្ចី
+                  <p style="color:red">ប្រាក់កម្ចី</p>
+                  
                 </v-col>
                 <v-col align-self="end" class="text-h6">
-                  {{ oneMember.loan }}​​ ៛
+                  <p style="color:red">{{ oneMember.loan }}​​ ៛</p>
+                  
                 </v-col>
               </v-row>
             </div>
