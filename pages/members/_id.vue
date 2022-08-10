@@ -1,26 +1,26 @@
 <template>
-  <v-card width="100%" v-if="oneMember" >
+  <v-card width="100%" v-if="oneMember" outlined>
     <v-card-title class="justify-center text-h5">
       <v-row>
-        <v-col class="text-h6" cols="3" align-self="end">
+        <v-col class="text-h6" cols="4" align-self="end">
           <v-progress-circular
             rotate="360"
-            size="100"
+            size="150"
             width="15"
             color="teal"
           >
-            {{ oneMember.deposit }} ៛
+            {{ oneMember.deposit.toLocaleString() }} ៛
           </v-progress-circular>
           <v-progress-circular
             rotate="360"
-            size="100"
+            size="150"
             width="15"
             color="red"
           >
-            {{ oneMember.loan }} ៛
+            {{ oneMember.loan.toLocaleString() }} ៛
           </v-progress-circular>
         </v-col>
-        <v-col align-self="end" class="text-h6">
+        <v-col align-self="center" class="text-h6">
           <v-card-title>
           {{ oneMember.name }}
           </v-card-title>
@@ -84,7 +84,7 @@
                 </v-col>
                 <v-col align-self="end" class="text-h6">
                   <p style="color:teal">
-                  {{ oneMember.deposit }} ៛
+                  {{ oneMember.deposit.toLocaleString() }} ៛
                   </p>
                 </v-col>
               </v-row>
@@ -106,7 +106,7 @@
                   
                 </v-col>
                 <v-col align-self="end" class="text-h6">
-                  <p style="color:red">{{ oneMember.loan }}​​ ៛</p>
+                  <p style="color:red">{{ oneMember.loan.toLocaleString() }}​​ ៛</p>
                   
                 </v-col>
               </v-row>
