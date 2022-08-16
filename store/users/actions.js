@@ -74,7 +74,7 @@ export default {
   async getTotalLoans({ commit }) {
     return await new Promise((resolve, reject) => {
       securedInst
-        .get(`${process.env.NUXT_ENV_API_URL}/api/v1/loans/get_total_loans`)
+        .get(`/api/v1/loans/get_total_loans`)
         .then((resp) => {
           const obj = resp.data
           if (obj === null) {

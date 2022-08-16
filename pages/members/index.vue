@@ -101,7 +101,6 @@ export default {
         .then((res) => {
           this.pagination.totalCount = res.data.total_count
           this.pagination.totalPages = res.data.total_pages
-          console.log(typeof res.data.members[0].deposit)
         })
         .catch()
         .finally(() => this.isLoading = false)

@@ -6,7 +6,7 @@ export const state = () => ({
   allUsers: [],
   totalMembers: null,
   totalDeposits: null,
-  totalLoan: null,
+  totalLoans: null,
   totalClients: null,
 })
 

@@ -114,12 +114,12 @@
           </template>
         </v-hover>
         <div class="d-flex justify-center my-4">
-          <v-card-action class="justify-center">
+          <v-card-actions class="justify-center">
             <v-btn x-large color="primary" @click="toDeposit">
               ដាក់ប្រាក់សន្សំ
             </v-btn>
             <v-btn x-large color="primary" @click="toRepay"> សងប្រាក់ </v-btn>
-          </v-card-action>
+          </v-card-actions>
         </div>
       </div>
     </v-card-text>
