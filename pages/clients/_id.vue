@@ -39,19 +39,19 @@
         </v-hover>
         <div class="my-2"></div>
         <v-hover>
-          <template v-slot:default="{ hover }" >
+          <template v-slot:default="{ hover }">
             <div
               :class="`elevation-${hover ? 24 : 3}`"
-              class="mx-auto pa-6 transition-swing rounded-lg "
+              class="mx-auto pa-6 transition-swing rounded-lg"
             >
               <v-row>
-                <v-col class="text-h6" cols="3" align-self="end" >
-                  <p style="color:red">ប្រាក់កម្ចី</p>
-                  
+                <v-col class="text-h6" cols="3" align-self="end">
+                  <p style="color: red">ប្រាក់កម្ចី</p>
                 </v-col>
                 <v-col align-self="end" class="text-h6">
-                  <p style="color:red">{{ oneMember.loan.toLocaleString() }}​​ ៛</p>
-                  
+                  <p style="color: red">
+                    {{ oneMember.loan.toLocaleString() }}​​ ៛
+                  </p>
                 </v-col>
               </v-row>
             </div>
@@ -59,9 +59,6 @@
         </v-hover>
         <div class="d-flex justify-center my-4">
           <v-card-actions class="justify-center">
-            <v-btn x-large color="primary" @click="toDeposit">
-              ដាក់ប្រាក់សន្សំ
-            </v-btn>
             <v-btn x-large color="primary" @click="toRepay"> សងប្រាក់ </v-btn>
           </v-card-actions>
         </div>
