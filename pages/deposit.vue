@@ -95,7 +95,7 @@
           <span>ឈ្មោះ៖ </span><strong>{{ getMemberToDeoposit.name }}</strong>
         </div>
         <div>
-          <span>ចំនួនទឹកប្រាក់៖ </span><strong>{{ amount }}៛</strong>
+          <span>ចំនួនទឹកប្រាក់៖ </span><strong>{{ parseInt(amount).toLocaleString() }}៛</strong>
         </div>
       </template>
     </confirm-dialog>
@@ -151,10 +151,6 @@ export default {
         })
         .then((res) => {
           this.$nuxt.$emit('setSnackbar', 'ប្រតិបត្តិការជោគជ័យ')
-          if (this.getMemberToDeoposit.name === this.me.name) {
-            this.$router.push('/')
-            return
-          }
           this.$router.push(`/members/${this.getMemberToDeoposit.id}`)
         })
         .catch()
