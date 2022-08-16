@@ -15,7 +15,7 @@
           show-select
           hide-default-footer
           :items-per-page="pagination.itemsPerPage"
-          @click:row="doGoToTheMember"
+          @click:row="doGoToTheClient"
         >
           <template #[`item.loan`]="{ item }">
             <div>{{ item.loan > 0 ? item.loan.toLocaleString() : 0 }}៛</div>
@@ -94,8 +94,8 @@ export default {
     paginated() {
       this.fetchMembers();
     },
-    doGoToTheMember(member) {
-      this.$router.push(`/members/${member.id}`);
+    doGoToTheClient(client) {
+      this.$router.push(`/clients/${client.id}`);
     },
   },
   mounted() {
